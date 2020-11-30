@@ -65,10 +65,10 @@ namespace Red21_Paint
     private void paintSurface_MouseUp(object sender, MouseEventArgs e)
     {
       isMouseDown = false;
-      if (isFigure)
-      {
-        mainBitmap = tmpBitmap;
-      }    
+      //if (isFigure)
+      //{
+      //  mainBitmap = tmpBitmap;
+      //}    
     }
 
     private void cyrcle_Click(object sender, EventArgs e)
