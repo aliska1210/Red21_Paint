@@ -51,24 +51,30 @@
             this.button14 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.Pencil = new System.Windows.Forms.Button();
-            this.Rectangle = new System.Windows.Forms.Button();
-            this.TriangleF = new System.Windows.Forms.Button();
-            this.button27 = new System.Windows.Forms.Button();
-            this.button32 = new System.Windows.Forms.Button();
-            this.button31 = new System.Windows.Forms.Button();
-            this.button30 = new System.Windows.Forms.Button();
-            this.button29 = new System.Windows.Forms.Button();
+            this.save = new System.Windows.Forms.Button();
+            this.pencil = new System.Windows.Forms.Button();
+            this.rectangle = new System.Windows.Forms.Button();
+            this.square = new System.Windows.Forms.Button();
+            this.cyrcle = new System.Windows.Forms.Button();
+            this.ellipse = new System.Windows.Forms.Button();
+            this.triangleDraw = new System.Windows.Forms.Button();
+            this.sasTriangle = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
-            this.button34 = new System.Windows.Forms.Button();
+            this.open = new System.Windows.Forms.Button();
+            this.randomNAngle = new System.Windows.Forms.Button();
+            this.nAngle = new System.Windows.Forms.Button();
+            this.laser = new System.Windows.Forms.Button();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.line = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.paintSurface)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // paintSurface
             // 
-            this.paintSurface.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.paintSurface.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.paintSurface.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.paintSurface.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -91,7 +97,6 @@
             this.button1.Size = new System.Drawing.Size(26, 28);
             this.button1.TabIndex = 0;
             this.button1.UseVisualStyleBackColor = false;
-
             // 
             // button2
             // 
@@ -354,82 +359,94 @@
             this.panel1.Size = new System.Drawing.Size(311, 51);
             this.panel1.TabIndex = 1;
             // 
-            // Pencil
+            // save
             // 
-            this.Pencil.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Pencil.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Pencil.Location = new System.Drawing.Point(5, 59);
-            this.Pencil.Name = "Pencil";
-            this.Pencil.Size = new System.Drawing.Size(51, 47);
-            this.Pencil.TabIndex = 0;
-            this.Pencil.UseVisualStyleBackColor = true;
+            this.save.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.save.Location = new System.Drawing.Point(5, 37);
+            this.save.Name = "save";
+            this.save.Size = new System.Drawing.Size(51, 28);
+            this.save.TabIndex = 0;
+            this.save.Tag = "save";
+            this.save.Text = "Save";
+            this.save.UseVisualStyleBackColor = true;
             // 
-            // Rectangle
+            // pencil
             // 
-            this.Rectangle.BackColor = System.Drawing.SystemColors.Control;
-            this.Rectangle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Rectangle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Rectangle.Location = new System.Drawing.Point(4, 112);
-            this.Rectangle.Name = "Rectangle";
-            this.Rectangle.Size = new System.Drawing.Size(51, 47);
-            this.Rectangle.TabIndex = 1;
-            this.Rectangle.UseVisualStyleBackColor = false;
+            this.pencil.BackColor = System.Drawing.SystemColors.Control;
+            this.pencil.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pencil.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.pencil.Location = new System.Drawing.Point(4, 71);
+            this.pencil.Name = "pencil";
+            this.pencil.Size = new System.Drawing.Size(51, 47);
+            this.pencil.TabIndex = 1;
+            this.pencil.Tag = "Pencil";
+            this.pencil.Text = "Pencil";
+            this.pencil.UseVisualStyleBackColor = false;
             // 
-            // TriangleF
+            // rectangle
             // 
-            this.TriangleF.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.TriangleF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.TriangleF.Location = new System.Drawing.Point(4, 165);
-            this.TriangleF.Name = "TriangleF";
-            this.TriangleF.Size = new System.Drawing.Size(51, 47);
-            this.TriangleF.TabIndex = 2;
-            this.TriangleF.UseVisualStyleBackColor = true;
+            this.rectangle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.rectangle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rectangle.Location = new System.Drawing.Point(4, 124);
+            this.rectangle.Name = "rectangle";
+            this.rectangle.Size = new System.Drawing.Size(51, 47);
+            this.rectangle.TabIndex = 2;
+            this.rectangle.Tag = "Rectangle";
+            this.rectangle.Text = "Rectangle";
+            this.rectangle.UseVisualStyleBackColor = true;
             // 
-            // button27
+            // square
             // 
-            this.button27.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button27.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button27.Location = new System.Drawing.Point(4, 218);
-            this.button27.Name = "button27";
-            this.button27.Size = new System.Drawing.Size(51, 47);
-            this.button27.TabIndex = 3;
-            this.button27.UseVisualStyleBackColor = true;
+            this.square.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.square.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.square.Location = new System.Drawing.Point(4, 177);
+            this.square.Name = "square";
+            this.square.Size = new System.Drawing.Size(51, 47);
+            this.square.TabIndex = 3;
+            this.square.Tag = "Square";
+            this.square.Text = "Square";
+            this.square.UseVisualStyleBackColor = true;
             // 
-            // button32
+            // cyrcle
             // 
-            this.button32.Location = new System.Drawing.Point(4, 271);
-            this.button32.Name = "button32";
-            this.button32.Size = new System.Drawing.Size(51, 47);
-            this.button32.TabIndex = 4;
-            this.button32.Text = "button32";
-            this.button32.UseVisualStyleBackColor = true;
+            this.cyrcle.Location = new System.Drawing.Point(4, 230);
+            this.cyrcle.Name = "cyrcle";
+            this.cyrcle.Size = new System.Drawing.Size(51, 47);
+            this.cyrcle.TabIndex = 4;
+            this.cyrcle.Tag = "Cyrcle";
+            this.cyrcle.Text = "Cyrcle";
+            this.cyrcle.UseVisualStyleBackColor = true;
             // 
-            // button31
+            // ellipse
             // 
-            this.button31.Location = new System.Drawing.Point(4, 324);
-            this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(51, 47);
-            this.button31.TabIndex = 5;
-            this.button31.Text = "button31";
-            this.button31.UseVisualStyleBackColor = true;
+            this.ellipse.Location = new System.Drawing.Point(4, 283);
+            this.ellipse.Name = "ellipse";
+            this.ellipse.Size = new System.Drawing.Size(51, 47);
+            this.ellipse.TabIndex = 5;
+            this.ellipse.Tag = "Ellipse";
+            this.ellipse.Text = "Ellipse";
+            this.ellipse.UseVisualStyleBackColor = true;
             // 
-            // button30
+            // triangleDraw
             // 
-            this.button30.Location = new System.Drawing.Point(4, 377);
-            this.button30.Name = "button30";
-            this.button30.Size = new System.Drawing.Size(51, 47);
-            this.button30.TabIndex = 6;
-            this.button30.Text = "button30";
-            this.button30.UseVisualStyleBackColor = true;
+            this.triangleDraw.Location = new System.Drawing.Point(4, 336);
+            this.triangleDraw.Name = "triangleDraw";
+            this.triangleDraw.Size = new System.Drawing.Size(51, 47);
+            this.triangleDraw.TabIndex = 6;
+            this.triangleDraw.Tag = "Triangle";
+            this.triangleDraw.Text = "Triangle";
+            this.triangleDraw.UseVisualStyleBackColor = true;
             // 
-            // button29
+            // sasTriangle
             // 
-            this.button29.Location = new System.Drawing.Point(4, 430);
-            this.button29.Name = "button29";
-            this.button29.Size = new System.Drawing.Size(51, 47);
-            this.button29.TabIndex = 7;
-            this.button29.Text = "button29";
-            this.button29.UseVisualStyleBackColor = true;
+            this.sasTriangle.Location = new System.Drawing.Point(4, 389);
+            this.sasTriangle.Name = "sasTriangle";
+            this.sasTriangle.Size = new System.Drawing.Size(51, 47);
+            this.sasTriangle.TabIndex = 7;
+            this.sasTriangle.Tag = "SasTriangle";
+            this.sasTriangle.Text = "SasT";
+            this.sasTriangle.UseVisualStyleBackColor = true;
             // 
             // button33
             // 
@@ -438,17 +455,66 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(51, 47);
             this.button33.TabIndex = 8;
-            this.button33.Text = "button33";
+            this.button33.Text = "Clear";
             this.button33.UseVisualStyleBackColor = true;
             // 
-            // button34
+            // open
             // 
-            this.button34.Location = new System.Drawing.Point(4, 7);
-            this.button34.Name = "button34";
-            this.button34.Size = new System.Drawing.Size(51, 47);
-            this.button34.TabIndex = 9;
-            this.button34.Text = "button34";
-            this.button34.UseVisualStyleBackColor = true;
+            this.open.Location = new System.Drawing.Point(4, 7);
+            this.open.Name = "open";
+            this.open.Size = new System.Drawing.Size(51, 24);
+            this.open.TabIndex = 9;
+            this.open.Text = "Open";
+            this.open.UseVisualStyleBackColor = true;
+            this.open.Click += new System.EventHandler(this.button34_Click);
+            // 
+            // randomNAngle
+            // 
+            this.randomNAngle.Location = new System.Drawing.Point(4, 495);
+            this.randomNAngle.Name = "randomNAngle";
+            this.randomNAngle.Size = new System.Drawing.Size(51, 47);
+            this.randomNAngle.TabIndex = 11;
+            this.randomNAngle.Tag = "RandomNAngle";
+            this.randomNAngle.Text = "RandNAngle";
+            this.randomNAngle.UseVisualStyleBackColor = true;
+            // 
+            // nAngle
+            // 
+            this.nAngle.Location = new System.Drawing.Point(4, 442);
+            this.nAngle.Name = "nAngle";
+            this.nAngle.Size = new System.Drawing.Size(51, 47);
+            this.nAngle.TabIndex = 10;
+            this.nAngle.Tag = "NAngle";
+            this.nAngle.Text = "NAngle";
+            this.nAngle.UseVisualStyleBackColor = true;
+            // 
+            // laser
+            // 
+            this.laser.FlatAppearance.BorderSize = 0;
+            this.laser.Location = new System.Drawing.Point(433, 6);
+            this.laser.Name = "laser";
+            this.laser.Size = new System.Drawing.Size(51, 47);
+            this.laser.TabIndex = 12;
+            this.laser.Tag = "Laser";
+            this.laser.Text = "Laser";
+            this.laser.UseVisualStyleBackColor = true;
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(490, 11);
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(104, 45);
+            this.trackBar1.TabIndex = 13;
+            // 
+            // line
+            // 
+            this.line.Location = new System.Drawing.Point(4, 548);
+            this.line.Name = "line";
+            this.line.Size = new System.Drawing.Size(51, 47);
+            this.line.TabIndex = 14;
+            this.line.Tag = "Line";
+            this.line.Text = "Line";
+            this.line.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -457,18 +523,23 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.SlateGray;
             this.ClientSize = new System.Drawing.Size(898, 611);
+            this.Controls.Add(this.line);
+            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.laser);
+            this.Controls.Add(this.randomNAngle);
+            this.Controls.Add(this.nAngle);
             this.Controls.Add(this.button33);
-            this.Controls.Add(this.button34);
-            this.Controls.Add(this.button29);
-            this.Controls.Add(this.button30);
+            this.Controls.Add(this.open);
+            this.Controls.Add(this.sasTriangle);
+            this.Controls.Add(this.triangleDraw);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button31);
+            this.Controls.Add(this.ellipse);
             this.Controls.Add(this.paintSurface);
-            this.Controls.Add(this.button32);
-            this.Controls.Add(this.Pencil);
-            this.Controls.Add(this.button27);
-            this.Controls.Add(this.Rectangle);
-            this.Controls.Add(this.TriangleF);
+            this.Controls.Add(this.cyrcle);
+            this.Controls.Add(this.save);
+            this.Controls.Add(this.square);
+            this.Controls.Add(this.pencil);
+            this.Controls.Add(this.rectangle);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(650, 450);
             this.Name = "Form1";
@@ -478,7 +549,9 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.paintSurface)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -510,16 +583,21 @@
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button Pencil;
-        private System.Windows.Forms.Button Rectangle;
-        private System.Windows.Forms.Button TriangleF;
-        private System.Windows.Forms.Button button27;
-        private System.Windows.Forms.Button button32;
-        private System.Windows.Forms.Button button31;
-        private System.Windows.Forms.Button button30;
-        private System.Windows.Forms.Button button29;
+        private System.Windows.Forms.Button save;
+        private System.Windows.Forms.Button pencil;
+        private System.Windows.Forms.Button rectangle;
+        private System.Windows.Forms.Button square;
+        private System.Windows.Forms.Button cyrcle;
+        private System.Windows.Forms.Button ellipse;
+        private System.Windows.Forms.Button triangleDraw;
+        private System.Windows.Forms.Button sasTriangle;
         private System.Windows.Forms.Button button33;
-        private System.Windows.Forms.Button button34;
+        private System.Windows.Forms.Button open;
+        private System.Windows.Forms.Button randomNAngle;
+        private System.Windows.Forms.Button nAngle;
+        private System.Windows.Forms.Button laser;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Button line;
     }
 }
 

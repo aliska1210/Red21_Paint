@@ -60,5 +60,10 @@ namespace Red21_Paint
 
 			point = e.Location;
 		}
-	}
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
 }
