@@ -12,10 +12,12 @@ namespace Red21_Paint
         Bitmap tmpBitmap { get; set; }
         Graphics graphics;
         Pen pen;
+        Pen laserWhite;
         Point point;
         IFigureCreator figureCreator;
         bool isFigure;
         bool isMouseDown;
+        bool isLaser;
 
         public Form1()
         {
@@ -38,13 +40,27 @@ namespace Red21_Paint
                     pen = new Pen(Color.Black, sizePen.Value);
                     pen.EndCap = LineCap.Round;
                     pen.StartCap = LineCap.Round;
+                    laserWhite = new Pen(Color.White, 15);
+                    laserWhite.StartCap = LineCap.Round;
+                    laserWhite.EndCap = LineCap.Round;
+                    
 
                     if (!isFigure)
                     {
-                        graphics.DrawLine(pen, point, e.Location);
-                        point = e.Location;
-                        tmpBitmap = (Bitmap)mainBitmap.Clone();
-                        paintSurface.Image = mainBitmap;
+                        if (isLaser)
+                        {
+                            graphics.DrawLine(laserWhite, point, e.Location);
+                            point = e.Location;
+                            tmpBitmap = (Bitmap)mainBitmap.Clone();
+                            paintSurface.Image = mainBitmap;
+                        }
+                        else
+                        {
+                            graphics.DrawLine(pen, point, e.Location);
+                            point = e.Location;
+                            tmpBitmap = (Bitmap)mainBitmap.Clone();
+                            paintSurface.Image = mainBitmap;
+                        }
                     }
 
                     if (isFigure)
@@ -125,6 +141,12 @@ namespace Red21_Paint
         {
             figureCreator = new SasTriangleCreator();
             isFigure = true;
+        }
+
+        private void laser_Click(object sender, EventArgs e)
+        {
+            isLaser = true;
+            isFigure = false;
         }
     }
 }
