@@ -557,9 +557,19 @@
             // NumberOfCorners
             // 
             this.NumberOfCorners.Location = new System.Drawing.Point(693, 15);
+            this.NumberOfCorners.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
             this.NumberOfCorners.Name = "NumberOfCorners";
             this.NumberOfCorners.Size = new System.Drawing.Size(64, 22);
             this.NumberOfCorners.TabIndex = 15;
+            this.NumberOfCorners.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
             this.NumberOfCorners.ValueChanged += new System.EventHandler(this.NumberOfCorners_ValueChanged_1);
             // 
             // Form1
