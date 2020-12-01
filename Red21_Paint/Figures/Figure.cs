@@ -21,7 +21,7 @@ namespace Red21_Paint.Figures
       {
         graphics.DrawLine(pen, Points[i], Points[i + 1]);
       }
-      graphics.DrawLine(pen, Points[0], Points[Points.Count - 2]);
+      graphics.DrawLine(pen, Points[0], Points[Points.Count - 1]);
     }
   }
 }

@@ -449,6 +449,7 @@
             this.rectangle.Tag = "Rectangle";
             this.rectangle.Text = "Rectangle";
             this.rectangle.UseVisualStyleBackColor = true;
+            this.rectangle.Click += new System.EventHandler(this.rectangle_Click);
             // 
             // square
             // 
