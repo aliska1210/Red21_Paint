@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Figures\CircleCreator.cs" />
+    <Compile Include="Figures\SquareCreator.cs" />
     <Compile Include="Figures\TriangleCreator.cs" />
     <Compile Include="Figures\Figure.cs" />
     <Compile Include="Figures\IFigureCreator.cs" />
