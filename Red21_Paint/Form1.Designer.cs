@@ -472,7 +472,7 @@
             // 
             // sasTriangle
             // 
-            this.sasTriangle.Location = new System.Drawing.Point(4, 389);
+            this.sasTriangle.Location = new System.Drawing.Point(4, 390);
             this.sasTriangle.Name = "sasTriangle";
             this.sasTriangle.Size = new System.Drawing.Size(68, 58);
             this.sasTriangle.TabIndex = 7;
@@ -534,14 +534,15 @@
             // sizePen
             // 
             this.sizePen.LargeChange = 2;
-            this.sizePen.Location = new System.Drawing.Point(490, 11);
+            this.sizePen.Location = new System.Drawing.Point(503, 6);
             this.sizePen.Maximum = 20;
             this.sizePen.Minimum = 1;
             this.sizePen.Name = "sizePen";
             this.sizePen.Size = new System.Drawing.Size(104, 45);
-            this.sizePen.TabIndex = 10;
+            this.sizePen.TabIndex = 5;
             this.sizePen.TickFrequency = 2;
             this.sizePen.Value = 1;
+           
             // 
             // line
             // 
@@ -552,6 +553,7 @@
             this.line.Tag = "Line";
             this.line.Text = "Line";
             this.line.UseVisualStyleBackColor = true;
+            this.line.Click += new System.EventHandler(this.line_Click);
             // 
             // NumberOfCorners
             // 
@@ -577,7 +579,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.SlateGray;
-            this.ClientSize = new System.Drawing.Size(898, 411);
+            this.ClientSize = new System.Drawing.Size(898, 661);
             this.Controls.Add(this.line);
             this.Controls.Add(this.sizePen);
             this.Controls.Add(this.laser);
@@ -601,7 +603,6 @@
             this.MinimumSize = new System.Drawing.Size(650, 450);
             this.Name = "Form1";
             this.RightToLeftLayout = true;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.paintSurface)).EndInit();
