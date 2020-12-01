@@ -11,13 +11,13 @@ namespace Red21_Paint.Figures
     {
         public Figure CreateFigure(Point start, Point end)
         {
-            List<Point> squarePoints = new List<Point>();
-            squarePoints.Add(new Point(start.X, start.Y));
-            squarePoints.Add(new Point(start.X, end.Y));
-            squarePoints.Add(new Point(end.X, end.Y));
-            squarePoints.Add(new Point(end.X, start.Y));
+            List<Point> rectanglePoints = new List<Point>();
+            rectanglePoints.Add(new Point(start.X, start.Y));
+            rectanglePoints.Add(new Point(start.X, end.Y));
+            rectanglePoints.Add(new Point(end.X, end.Y));
+            rectanglePoints.Add(new Point(end.X, start.Y));
 
-            return new Figure(squarePoints);
+            return new Figure(rectanglePoints);
         }
     }
 }
