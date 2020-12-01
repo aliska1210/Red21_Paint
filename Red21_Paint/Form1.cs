@@ -28,7 +28,7 @@ namespace Red21_Paint
         {
             mainBitmap = new Bitmap(paintSurface.MaximumSize.Width, paintSurface.MaximumSize.Height);
             graphics = Graphics.FromImage(mainBitmap);
-            pen = new Pen(, sizePen.Value);
+            pen = new Pen(Color.Black, sizePen.Value);
         }
 
         private void paintSurface_MouseMove(object sender, MouseEventArgs e)
