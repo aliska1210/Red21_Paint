@@ -45,6 +45,7 @@ namespace Red21_Paint
                         point = e.Location;
                         tmpBitmap = (Bitmap)mainBitmap.Clone();
                         paintSurface.Image = mainBitmap;
+                        GC.Collect();
                     }
 
                     if (isFigure)
@@ -99,7 +100,7 @@ namespace Red21_Paint
 
         private void nAngle_Click(object sender, EventArgs e)
         {
-            figureCreator = new TrueNAngleCreator();
+            figureCreator = new TrueNAngleCreator((int)NumberOfCorners.Value);
             isFigure = true;
         }
         private void square_Click(object sender, EventArgs e)
@@ -119,6 +120,12 @@ namespace Red21_Paint
             isFigure = true;
         }
 
-      
+        private void NumberOfCorners_ValueChanged_1(object sender, EventArgs e)
+        {
+            if(figureCreator is TrueNAngleCreator figure)
+            {
+                figure.Number = (int)NumberOfCorners.Value;
+            }
+        }
     }
 }

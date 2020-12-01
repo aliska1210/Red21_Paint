@@ -195,7 +195,7 @@
             this.button9.BackColor = System.Drawing.Color.Olive;
             this.button9.FlatAppearance.BorderSize = 0;
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button9.Location = new System.Drawing.Point(232, 0);
+            this.button9.Location = new System.Drawing.Point(233, 0);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(35, 34);
             this.button9.TabIndex = 9;
@@ -381,9 +381,9 @@
             this.ColorBox.Controls.Add(this.button4);
             this.ColorBox.Controls.Add(this.button2);
             this.ColorBox.Controls.Add(this.button1);
-            this.ColorBox.Location = new System.Drawing.Point(61, 3);
+            this.ColorBox.Location = new System.Drawing.Point(102, 3);
             this.ColorBox.Name = "ColorBox";
-            this.ColorBox.Size = new System.Drawing.Size(415, 63);
+            this.ColorBox.Size = new System.Drawing.Size(327, 65);
             this.ColorBox.TabIndex = 1;
             // 
             // save
@@ -483,7 +483,7 @@
             // button33
             // 
             this.button33.FlatAppearance.BorderSize = 0;
-            this.button33.Location = new System.Drawing.Point(376, 6);
+            this.button33.Location = new System.Drawing.Point(435, 5);
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(68, 58);
             this.button33.TabIndex = 8;
@@ -492,7 +492,7 @@
             // 
             // ImageBox
             // 
-            this.ImageBox.Location = new System.Drawing.Point(4, 7);
+            this.ImageBox.Location = new System.Drawing.Point(5, 7);
             this.ImageBox.Name = "ImageBox";
             this.ImageBox.Size = new System.Drawing.Size(68, 30);
             this.ImageBox.TabIndex = 9;
@@ -523,7 +523,7 @@
             // laser
             // 
             this.laser.FlatAppearance.BorderSize = 0;
-            this.laser.Location = new System.Drawing.Point(433, 6);
+            this.laser.Location = new System.Drawing.Point(509, 4);
             this.laser.Name = "laser";
             this.laser.Size = new System.Drawing.Size(68, 58);
             this.laser.TabIndex = 12;
@@ -534,15 +534,14 @@
             // sizePen
             // 
             this.sizePen.LargeChange = 2;
-            this.sizePen.Location = new System.Drawing.Point(503, 6);
+            this.sizePen.Location = new System.Drawing.Point(583, 14);
             this.sizePen.Maximum = 20;
             this.sizePen.Minimum = 1;
             this.sizePen.Name = "sizePen";
-            this.sizePen.Size = new System.Drawing.Size(104, 45);
+            this.sizePen.Size = new System.Drawing.Size(104, 48);
             this.sizePen.TabIndex = 5;
             this.sizePen.TickFrequency = 2;
             this.sizePen.Value = 1;
-           
             // 
             // line
             // 
@@ -557,21 +556,11 @@
             // 
             // NumberOfCorners
             // 
-            this.NumberOfCorners.Location = new System.Drawing.Point(799, 17);
-            this.NumberOfCorners.Minimum = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
+            this.NumberOfCorners.Location = new System.Drawing.Point(693, 15);
             this.NumberOfCorners.Name = "NumberOfCorners";
-            this.NumberOfCorners.Size = new System.Drawing.Size(62, 22);
+            this.NumberOfCorners.Size = new System.Drawing.Size(64, 22);
             this.NumberOfCorners.TabIndex = 15;
-            this.NumberOfCorners.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.NumberOfCorners.ValueChanged += new System.EventHandler(this.NumberOfCorners_ValueChanged);
+            this.NumberOfCorners.ValueChanged += new System.EventHandler(this.NumberOfCorners_ValueChanged_1);
             // 
             // Form1
             // 
@@ -580,6 +569,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.SlateGray;
             this.ClientSize = new System.Drawing.Size(898, 661);
+            this.Controls.Add(this.NumberOfCorners);
             this.Controls.Add(this.line);
             this.Controls.Add(this.sizePen);
             this.Controls.Add(this.laser);
@@ -656,7 +646,7 @@
         private System.Windows.Forms.Button line;
         private System.Windows.Forms.TrackBar sizePen;
         public System.Windows.Forms.PictureBox paintSurface;
-        private System.Windows.Forms.NumericUpDown NumberOfCorners;
+        public System.Windows.Forms.NumericUpDown NumberOfCorners;
     }
 }
 

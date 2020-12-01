@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Red21_Paint.Figures
 {
-  public class CircleCreator: IFigureCreator
+    public class CircleCreator: IFigureCreator
   {
     public Figure CreateFigure(Point start, Point end)
     {
