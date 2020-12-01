@@ -119,6 +119,9 @@ namespace Red21_Paint
             isFigure = true;
         }
 
-      
+        private void nLine_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
