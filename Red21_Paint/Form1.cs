@@ -22,8 +22,6 @@ namespace Red21_Paint
             InitializeComponent();
         }
 
-
-
         private void Form1_Load(object sender, EventArgs e)
         {
             mainBitmap = new Bitmap(paintSurface.MaximumSize.Width, paintSurface.MaximumSize.Height);
@@ -37,8 +35,10 @@ namespace Red21_Paint
             {
                 if (isMouseDown)
                 {
+                    pen = new Pen(Color.Black, sizePen.Value);
                     pen.EndCap = LineCap.Round;
                     pen.StartCap = LineCap.Round;
+
                     if (!isFigure)
                     {
                         graphics.DrawLine(pen, point, e.Location);
@@ -55,6 +55,8 @@ namespace Red21_Paint
                         figure.DrawFigure(graphics, pen);// использую свой собственный метод
                         paintSurface.Image = tmpBitmap;
                     }
+                    
+                    GC.Collect();
                 }
             }
         }
@@ -92,9 +94,36 @@ namespace Red21_Paint
             isFigure = true;
         }
 
+        public void NumberOfCorners_ValueChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void nAngle_Click(object sender, EventArgs e)
+        {
+            figureCreator = new TrueNAngleCreator();
+            isFigure = true;
+        }
         private void square_Click(object sender, EventArgs e)
         {
             figureCreator = new SquareCreator();
+            isFigure = true;
+        }
+
+        private void rectangle_Click(object sender, EventArgs e)
+        {
+            figureCreator = new RectangleCreator();
+            isFigure = true;
+        }
+        private void line_Click(object sender, EventArgs e)
+        {
+            figureCreator = new LineCreator();
+            isFigure = true;
+        }
+
+        private void sasTriangle_Click(object sender, EventArgs e)
+        {
+            figureCreator = new SasTriangleCreator();
             isFigure = true;
         }
     }

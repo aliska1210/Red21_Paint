@@ -11,13 +11,15 @@ namespace Red21_Paint.Figures
     {
         public Figure CreateFigure(Point start, Point end)
         {
-            int dif = Math.Abs(start.X - end.X);
+            int dif = start.X - end.X;
+            end.X = start.X + dif;
+            end.Y = start.Y + dif;
 
             List<Point> squarePoints = new List<Point>();
             squarePoints.Add(new Point(start.X, start.Y));
-            squarePoints.Add(new Point(start.X, start.Y + dif));
-            squarePoints.Add(new Point(start.X+dif, start.Y+dif));
-            squarePoints.Add(new Point(start.X + dif, start.Y));
+            squarePoints.Add(new Point(start.X, end.Y));
+            squarePoints.Add(new Point(end.X, end.Y));
+            squarePoints.Add(new Point(end.X, start.Y));
 
             return new Figure(squarePoints);
         }
