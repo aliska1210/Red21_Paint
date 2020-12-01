@@ -100,5 +100,16 @@ namespace Red21_Paint
             figureCreator = new TrueNAngleCreator();
             isFigure = true;
         }
+        private void square_Click(object sender, EventArgs e)
+        {
+            figureCreator = new SquareCreator();
+            isFigure = true;
+        }
+
+        private void rectangle_Click(object sender, EventArgs e)
+        {
+            figureCreator = new RectangleCreator();
+            isFigure = true;
+        }
     }
 }
