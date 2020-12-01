@@ -18,6 +18,7 @@ namespace Red21_Paint
         bool isFigure;
         bool isMouseDown;
         bool isLaser;
+        bool isClear;
 
         public Form1()
         {
@@ -43,7 +44,7 @@ namespace Red21_Paint
                     laserWhite = new Pen(Color.White, 15);
                     laserWhite.StartCap = LineCap.Round;
                     laserWhite.EndCap = LineCap.Round;
-                    
+
 
                     if (!isFigure)
                     {
@@ -61,10 +62,12 @@ namespace Red21_Paint
                             tmpBitmap = (Bitmap)mainBitmap.Clone();
                             paintSurface.Image = mainBitmap;
                         }
+
                     }
 
                     if (isFigure)
                     {
+                        isLaser = false;
                         tmpBitmap = new Bitmap(mainBitmap);// в tmp сохраняем mainBitmap до начала рисования новой фигуры, чтобы стирать все рисующиеся фигуры при движении (иначе будет заливка)
                         graphics = Graphics.FromImage(tmpBitmap);// отображаем на экране то что рисуется в tmp
                         Figure figure = figureCreator.CreateFigure(point, e.Location);
@@ -102,6 +105,7 @@ namespace Red21_Paint
         private void pencil_Click(object sender, EventArgs e)
         {
             isFigure = false;
+            isLaser = false;
         }
 
         private void triangleDraw_Click(object sender, EventArgs e)
@@ -147,6 +151,16 @@ namespace Red21_Paint
         {
             isLaser = true;
             isFigure = false;
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button33_MouseUp(object sender, MouseEventArgs e)
+        {
+            graphics.Clear(Color.White);
         }
     }
 }

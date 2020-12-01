@@ -524,6 +524,9 @@
             this.button33.TabIndex = 8;
             this.button33.Text = "Clear";
             this.button33.UseVisualStyleBackColor = true;
+            this.button33.Click += new System.EventHandler(this.button33_Click);
+            this.button33.MouseClick += new System.Windows.Forms.MouseEventHandler(this.button33_MouseUp);
+            this.button33.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button33_MouseUp);
             // 
             // ImageBox
             // 
