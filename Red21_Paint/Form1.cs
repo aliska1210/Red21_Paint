@@ -22,8 +22,6 @@ namespace Red21_Paint
             InitializeComponent();
         }
 
-
-
         private void Form1_Load(object sender, EventArgs e)
         {
             mainBitmap = new Bitmap(paintSurface.MaximumSize.Width, paintSurface.MaximumSize.Height);
@@ -92,5 +90,15 @@ namespace Red21_Paint
             isFigure = true;
         }
 
+        public void NumberOfCorners_ValueChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void nAngle_Click(object sender, EventArgs e)
+        {
+            figureCreator = new TrueNAngleCreator();
+            isFigure = true;
+        }
     }
 }

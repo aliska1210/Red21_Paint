@@ -50,6 +50,7 @@
     <Compile Include="Figures\TriangleCreator.cs" />
     <Compile Include="Figures\Figure.cs" />
     <Compile Include="Figures\IFigureCreator.cs" />
+    <Compile Include="Figures\TrueNAngleCreator.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
