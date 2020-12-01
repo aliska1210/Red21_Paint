@@ -17,8 +17,8 @@ namespace Red21_Paint.Figures
             List<Point> trianglePoints = new List<Point>();
             trianglePoints.Add(new Point(cx, cy)); 
             trianglePoints.Add(new Point(end.X, end.Y)); 
-            trianglePoints.Add(new Point(cx, end.Y)); 
-            trianglePoints.Add(new Point(cx, cy)); 
+            trianglePoints.Add(new Point(cx, end.Y));
+            trianglePoints.Add(new Point(cx, cy));
 
             return new Figure(trianglePoints);
         }

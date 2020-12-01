@@ -55,6 +55,8 @@ namespace Red21_Paint
                         figure.DrawFigure(graphics, pen);// использую свой собственный метод
                         paintSurface.Image = tmpBitmap;
                     }
+                    
+                    GC.Collect();
                 }
             }
         }
@@ -119,6 +121,10 @@ namespace Red21_Paint
             isFigure = true;
         }
 
-      
+        private void sasTriangle_Click(object sender, EventArgs e)
+        {
+            figureCreator = new SasTriangleCreator();
+            isFigure = true;
+        }
     }
 }
