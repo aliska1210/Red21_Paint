@@ -155,12 +155,12 @@ namespace Red21_Paint
 
         private void button33_Click(object sender, EventArgs e)
         {
-            
+            graphics.Clear(Color.White);
+            paintSurface.Image = mainBitmap;
         }
 
         private void button33_MouseUp(object sender, MouseEventArgs e)
         {
-            graphics.Clear(Color.White);
         }
     }
 }
