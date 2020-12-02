@@ -1,4 +1,4 @@
-﻿using Red21_Paint.Figures;
+using Red21_Paint.Figures;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -12,13 +12,12 @@ namespace Red21_Paint
     Bitmap tmpBitmap { get; set; }
     Graphics graphics;
     Pen pen;
-    Pen laserWhite;
     Point point;
+    Color color;
     IFigureCreator figureCreator;
     bool isFigure;
     bool isMouseDown;
     bool isLaser;
-    bool isClear;
 
     public Form1()
     {
@@ -29,7 +28,8 @@ namespace Red21_Paint
     {
       mainBitmap = new Bitmap(paintSurface.MaximumSize.Width, paintSurface.MaximumSize.Height);
       graphics = Graphics.FromImage(mainBitmap);
-      pen = new Pen(Color.Black, sizePen.Value);
+      color = Color.Black;
+      pen = new Pen(color, sizePen.Value);
     }
 
     private void paintSurface_MouseMove(object sender, MouseEventArgs e)
@@ -38,31 +38,17 @@ namespace Red21_Paint
       {
         if (isMouseDown)
         {
-          pen = new Pen(Color.Black, sizePen.Value);
+          color = isLaser ? Color.White : color;
+          pen = new Pen(color, sizePen.Value);
           pen.EndCap = LineCap.Round;
           pen.StartCap = LineCap.Round;
-          laserWhite = new Pen(Color.White, 15);
-          laserWhite.StartCap = LineCap.Round;
-          laserWhite.EndCap = LineCap.Round;
-
 
           if (!isFigure)
           {
-            if (isLaser)
-            {
-              graphics.DrawLine(laserWhite, point, e.Location);
-              point = e.Location;
-              tmpBitmap = (Bitmap)mainBitmap.Clone();
-              paintSurface.Image = mainBitmap;
-            }
-            else
-            {
-              graphics.DrawLine(pen, point, e.Location);
-              point = e.Location;
-              tmpBitmap = (Bitmap)mainBitmap.Clone();
-              paintSurface.Image = mainBitmap;
-            }
-
+            graphics.DrawLine(pen, point, e.Location);
+            point = e.Location;
+            tmpBitmap = (Bitmap)mainBitmap.Clone();
+            paintSurface.Image = mainBitmap;
           }
 
           if (isFigure)
@@ -153,14 +139,10 @@ namespace Red21_Paint
       isFigure = false;
     }
 
-    private void button33_Click(object sender, EventArgs e)
+    private void clear_Click(object sender, EventArgs e)
     {
       graphics.Clear(Color.White);
       paintSurface.Image = mainBitmap;
-    }
-
-    private void button33_MouseUp(object sender, MouseEventArgs e)
-    {
     }
 
     private void ellipse_Click(object sender, EventArgs e)

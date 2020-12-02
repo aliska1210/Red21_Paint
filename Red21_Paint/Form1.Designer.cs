@@ -1,4 +1,4 @@
-﻿namespace Red21_Paint
+namespace Red21_Paint
 {
     partial class Form1
     {
@@ -525,7 +525,7 @@
       this.button33.TabIndex = 8;
       this.button33.Text = "Clear";
       this.button33.UseVisualStyleBackColor = true;
-      this.button33.Click += new System.EventHandler(this.button33_Click);
+      this.button33.Click += new System.EventHandler(this.clear_Click);
       // 
       // ImageBox
       // 
@@ -578,12 +578,12 @@
       this.sizePen.LargeChange = 2;
       this.sizePen.Location = new System.Drawing.Point(503, 6);
       this.sizePen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-      this.sizePen.Maximum = 20;
+      this.sizePen.Maximum = 30;
       this.sizePen.Minimum = 1;
       this.sizePen.Name = "sizePen";
       this.sizePen.Size = new System.Drawing.Size(104, 56);
       this.sizePen.TabIndex = 5;
-      this.sizePen.TickFrequency = 2;
+      this.sizePen.TickFrequency = 3;
       this.sizePen.Value = 1;
       // 
       // line
