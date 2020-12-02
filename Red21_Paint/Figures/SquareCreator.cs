@@ -16,6 +16,11 @@ namespace Red21_Paint.Figures
             end.Y = start.Y + dif;
 
             List<Point> squarePoints = new List<Point>();
+            //squarePoints.Add(new Point(start.X, start.Y));
+            //squarePoints.Add(new Point(start.Y, end.X));
+            //squarePoints.Add(new Point(end.X, end.Y));
+            //squarePoints.Add(new Point(end.Y, start.X));
+
             squarePoints.Add(new Point(start.X, start.Y));
             squarePoints.Add(new Point(start.X, end.Y));
             squarePoints.Add(new Point(end.X, end.Y));
