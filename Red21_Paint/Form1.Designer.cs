@@ -67,6 +67,8 @@ namespace Red21_Paint
       this.sizePen = new System.Windows.Forms.TrackBar();
       this.line = new System.Windows.Forms.Button();
       this.NumberOfCorners = new System.Windows.Forms.NumericUpDown();
+      this.buttonChooseColor = new System.Windows.Forms.Button();
+      this.colorDialog1 = new System.Windows.Forms.ColorDialog();
       ((System.ComponentModel.ISupportInitialize)(this.paintSurface)).BeginInit();
       this.ColorBox.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.sizePen)).BeginInit();
@@ -616,6 +618,16 @@ namespace Red21_Paint
             0});
       this.NumberOfCorners.ValueChanged += new System.EventHandler(this.NumberOfCorners_ValueChanged);
       // 
+      // buttonChooseColor
+      // 
+      this.buttonChooseColor.Location = new System.Drawing.Point(603, 7);
+      this.buttonChooseColor.Name = "buttonChooseColor";
+      this.buttonChooseColor.Size = new System.Drawing.Size(75, 58);
+      this.buttonChooseColor.TabIndex = 15;
+      this.buttonChooseColor.Text = "Choose Color";
+      this.buttonChooseColor.UseVisualStyleBackColor = true;
+      this.buttonChooseColor.Click += new System.EventHandler(this.buttonChooseColor_Click);
+      // 
       // Form1
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -623,6 +635,7 @@ namespace Red21_Paint
       this.AutoSize = true;
       this.BackColor = System.Drawing.Color.SlateGray;
       this.ClientSize = new System.Drawing.Size(899, 661);
+      this.Controls.Add(this.buttonChooseColor);
       this.Controls.Add(this.line);
       this.Controls.Add(this.sizePen);
       this.Controls.Add(this.laser);
@@ -700,7 +713,9 @@ namespace Red21_Paint
         private System.Windows.Forms.TrackBar sizePen;
         public System.Windows.Forms.PictureBox paintSurface;
         private System.Windows.Forms.NumericUpDown NumberOfCorners;
-    }
+    private System.Windows.Forms.Button buttonChooseColor;
+    private System.Windows.Forms.ColorDialog colorDialog1;
+  }
 }
 
 

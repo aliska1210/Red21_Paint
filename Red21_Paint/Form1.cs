@@ -150,5 +150,15 @@ namespace Red21_Paint
       figureCreator = new OvalCreator();
       isFigure = true;
     }
+    // выбор цвета 
+    public void buttonChooseColor_Click(object sender, EventArgs e)
+    {
+      if (colorDialog1.ShowDialog() == DialogResult.OK)
+      {
+        color = colorDialog1.Color;
+      }
+    }
   }
-}
+  }
+
+    
