@@ -8,7 +8,7 @@ namespace Red21_Paint.Figures
         public Figure CreateFigure(Point start, Point end)
         {
             List<Point> trianglePoints = new List<Point>();
-            trianglePoints.Add(new Point((end.X - start.X)/2 + start.X, start.Y)); 
+            trianglePoints.Add(new Point(start.X, start.Y)); 
             trianglePoints.Add(new Point(end.X, end.Y)); 
             trianglePoints.Add(new Point(start.X, end.Y));
 
