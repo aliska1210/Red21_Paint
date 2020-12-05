@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace Red21_Paint.Figures
 {
-  public class CircleCreator: IFigureCreator
+    public class CircleCreator: IFigureCreator
   {
     public Figure CreateFigure(Point start, Point end)
     {
