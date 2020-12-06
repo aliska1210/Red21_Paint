@@ -46,17 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Figures\CircleCreator.cs" />
+    <Compile Include="FigureCreators\CircleCreator.cs" />
+    <Compile Include="Mode.cs" />
     <Compile Include="Figures\LineBreak.cs" />
-    <Compile Include="Figures\RectangleCreator.cs" />
-    <Compile Include="Figures\SasTriangleCreator.cs" />
-    <Compile Include="Figures\SquareCreator.cs" />
-    <Compile Include="Figures\LineCreator.cs" />
-    <Compile Include="Figures\OvalCreator.cs" />
-    <Compile Include="Figures\TriangleCreator.cs" />
+    <Compile Include="FigureCreators\RectangleCreator.cs" />
+    <Compile Include="FigureCreators\SasTriangleCreator.cs" />
+    <Compile Include="FigureCreators\SquareCreator.cs" />
+    <Compile Include="FigureCreators\LineCreator.cs" />
+    <Compile Include="FigureCreators\OvalCreator.cs" />
+    <Compile Include="FigureCreators\TriangleCreator.cs" />
     <Compile Include="Figures\Figure.cs" />
-    <Compile Include="Figures\IFigureCreator.cs" />
-    <Compile Include="Figures\TrueNAngleCreator.cs" />
+    <Compile Include="FigureCreators\IFigureCreator.cs" />
+    <Compile Include="FigureCreators\TrueNAngleCreator.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

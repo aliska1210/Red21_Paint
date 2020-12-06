@@ -17,7 +17,7 @@ namespace Red21_Paint.Figures
             rectanglePoints.Add(new Point(end.X, end.Y));
             rectanglePoints.Add(new Point(end.X, start.Y));
 
-            return new Figure(rectanglePoints);
+            return new Figure(rectanglePoints, start, end);
         }
     }
 }

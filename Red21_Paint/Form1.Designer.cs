@@ -69,6 +69,7 @@ namespace Red21_Paint
       this.NumberOfCorners = new System.Windows.Forms.NumericUpDown();
       this.buttonChooseColor = new System.Windows.Forms.Button();
       this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+      this.button25 = new System.Windows.Forms.Button();
       ((System.ComponentModel.ISupportInitialize)(this.paintSurface)).BeginInit();
       this.ColorBox.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.sizePen)).BeginInit();
@@ -90,6 +91,8 @@ namespace Red21_Paint
       this.paintSurface.TabIndex = 0;
       this.paintSurface.TabStop = false;
       this.paintSurface.MouseDown += new System.Windows.Forms.MouseEventHandler(this.paintSurface_MouseDown);
+      this.paintSurface.MouseLeave += new System.EventHandler(this.paintSurface_MouseLeave);
+      this.paintSurface.MouseHover += new System.EventHandler(this.paintSurface_MouseHover);
       this.paintSurface.MouseMove += new System.Windows.Forms.MouseEventHandler(this.paintSurface_MouseMove);
       this.paintSurface.MouseUp += new System.Windows.Forms.MouseEventHandler(this.paintSurface_MouseUp);
       // 
@@ -628,6 +631,16 @@ namespace Red21_Paint
       this.buttonChooseColor.UseVisualStyleBackColor = true;
       this.buttonChooseColor.Click += new System.EventHandler(this.buttonChooseColor_Click);
       // 
+      // button25
+      // 
+      this.button25.Location = new System.Drawing.Point(684, 6);
+      this.button25.Name = "button25";
+      this.button25.Size = new System.Drawing.Size(75, 58);
+      this.button25.TabIndex = 16;
+      this.button25.Text = "Edit";
+      this.button25.UseVisualStyleBackColor = true;
+      this.button25.Click += new System.EventHandler(this.edit_Click);
+      // 
       // Form1
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -635,6 +648,7 @@ namespace Red21_Paint
       this.AutoSize = true;
       this.BackColor = System.Drawing.Color.SlateGray;
       this.ClientSize = new System.Drawing.Size(899, 661);
+      this.Controls.Add(this.button25);
       this.Controls.Add(this.buttonChooseColor);
       this.Controls.Add(this.line);
       this.Controls.Add(this.sizePen);
@@ -715,6 +729,7 @@ namespace Red21_Paint
         private System.Windows.Forms.NumericUpDown NumberOfCorners;
     private System.Windows.Forms.Button buttonChooseColor;
     private System.Windows.Forms.ColorDialog colorDialog1;
+    private System.Windows.Forms.Button button25;
   }
 }
 

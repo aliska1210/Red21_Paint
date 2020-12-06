@@ -30,7 +30,7 @@ namespace Red21_Paint.Figures
             //    //nlinePoints.Add(new Point(nlinePoints[i+1].X, nlinePoints[i+1].Y));
             //}
          
-            return new Figure (linePoints);
+            return new Figure (linePoints, start, end);
         }
     }
 }

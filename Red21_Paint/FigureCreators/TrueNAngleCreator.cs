@@ -21,7 +21,7 @@ namespace Red21_Paint.Figures
                                       Convert.ToInt32(cy + radius * Math.Sin((2 * Math.PI * i) / 5))));
             }
 
-            return new Figure(nAnglePoints);
+            return new Figure(nAnglePoints, start, end);
         }
     }
 }

@@ -42,7 +42,7 @@ namespace Red21_Paint.Figures
       circlePoints.AddRange(circlePoints3);
       circlePoints.AddRange(circlePoints4);
 
-      return new Figure(circlePoints);
+      return new Figure(circlePoints, start, end);
     }
   }
 }
