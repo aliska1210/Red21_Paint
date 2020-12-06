@@ -83,7 +83,7 @@ namespace Red21_Paint
               tmpFigure.Points.Add(new Point(x , y));
             }
 
-            //баг!!!! startPoint и EndPoint не записываются в tmpFigure
+            //баг!!!! centerPoint не записываются в tmpFigure
             pen = editableFigure.Pen;
             tmpFigure.DrawFigure(graphics, pen);
             paintSurface.Image = tmpBitmap;
@@ -102,12 +102,25 @@ namespace Red21_Paint
 
       if (mode == Mode.editFigure)
       {
+        bool isPointMatch = false;
         foreach (Figure figure in figureStorage)
         {
           if (IsPointMatch(startPoint,  figure.CenterPoint))
           {
             editableFigure = figure;
+            isPointMatch = true;
+            graphics.Clear(Color.White);
+          }            
+        }
+
+        if (isPointMatch)
+        {
+          foreach (Figure figure in figureStorage)
+          {
+            if (figure != editableFigure)
+              figure.DrawFigure(graphics, figure.Pen);
           }
+          figureStorage.Remove(editableFigure);
         }
       }
     }
