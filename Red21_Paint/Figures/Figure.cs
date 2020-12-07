@@ -13,7 +13,7 @@ namespace Red21_Paint.Figures
       Points = points;
       StartPoint = start;
       EndPoint = end;
-      CenterPoint = new Point((start.X + (end.X - start.X)) / 2, start.Y + (end.Y - start.Y) / 2);
+      CenterPoint = new Point(((end.X + start.X)) / 2, (end.Y + start.Y) / 2);
     }
 
     public List<Point> Points { get; set; } // поле принимающее точки
@@ -31,6 +31,16 @@ namespace Red21_Paint.Figures
         graphics.DrawLine(pen, Points[i], Points[i + 1]);
       }
       graphics.DrawLine(pen, Points[0], Points[Points.Count - 1]);
+    }
+    public void Move(Point delta)
+    {
+      for (int i = 0; i < this.Points.Count; i++)
+      {
+        this.Points[i] = new Point(this.Points[i].X + delta.X, this.Points[i].Y + delta.Y);      
+      }
+      this.CenterPoint = new Point(this.CenterPoint.X + delta.X, this.CenterPoint.Y + delta.Y) ;
+      this.StartPoint = new Point(this.StartPoint.X + delta.X, StartPoint.Y + delta.Y);
+      this.EndPoint = new Point(this.EndPoint.X + delta.X, EndPoint.Y + delta.Y);
     }
   }
 }
