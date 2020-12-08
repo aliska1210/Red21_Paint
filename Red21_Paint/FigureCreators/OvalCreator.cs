@@ -22,7 +22,7 @@ namespace Red21_Paint.Figures
         ovalPoints.Add(new Point(centre.X + (int)(radiusX * Math.Cos(2 * Math.PI * i / N)),
           centre.Y + (int)(radiusY * Math.Sin(2 * Math.PI * i / N))));
       }
-      return new Figure(ovalPoints, start, end);
+      return new Figure(ovalPoints, start, end, centre);
     }
   }
 }

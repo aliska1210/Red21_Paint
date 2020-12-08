@@ -11,13 +11,14 @@ namespace Red21_Paint.Figures
     {
         public Figure CreateFigure(Point start, Point end)
         {
+            Point center = new Point(((end.X + start.X)) / 2, (end.Y + start.Y) / 2);
             List<Point> rectanglePoints = new List<Point>();
             rectanglePoints.Add(new Point(start.X, start.Y));
             rectanglePoints.Add(new Point(start.X, end.Y));
             rectanglePoints.Add(new Point(end.X, end.Y));
             rectanglePoints.Add(new Point(end.X, start.Y));
 
-            return new Figure(rectanglePoints, start, end);
+            return new Figure(rectanglePoints, start, end, center);
         }
     }
 }

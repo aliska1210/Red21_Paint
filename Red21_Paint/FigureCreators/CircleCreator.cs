@@ -10,6 +10,8 @@ namespace Red21_Paint.Figures
     {
       int cx = start.X;
       int cy = start.Y;
+      Point center = new Point(start.X, start.Y);
+
       int r = Convert.ToInt32(Math.Sqrt((end.X - start.X) * (end.X - start.X) + (end.Y - start.Y) * (end.Y - start.Y)));
 
       List<Point> arcPoints = new List<Point>();
@@ -41,8 +43,9 @@ namespace Red21_Paint.Figures
       circlePoints.AddRange(circlePoints2);
       circlePoints.AddRange(circlePoints3);
       circlePoints.AddRange(circlePoints4);
+      
 
-      return new Figure(circlePoints, start, end);
+      return new Figure(circlePoints, start, end, center);
     }
   }
 }

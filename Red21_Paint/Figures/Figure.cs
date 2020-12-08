@@ -8,12 +8,12 @@ namespace Red21_Paint.Figures
     public Figure()
     {
     }
-    public Figure(List<Point> points, Point start, Point end)
+    public Figure(List<Point> points, Point start, Point end, Point center)
     {
       Points = points;
       StartPoint = start;
       EndPoint = end;
-      CenterPoint = new Point(((end.X + start.X)) / 2, (end.Y + start.Y) / 2);
+      CenterPoint = center; 
     }
 
     public List<Point> Points { get; set; } // поле принимающее точки

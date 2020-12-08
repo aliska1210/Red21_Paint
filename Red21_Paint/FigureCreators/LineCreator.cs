@@ -11,7 +11,7 @@ namespace Red21_Paint.Figures
     {
         public Figure CreateFigure(Point start, Point end)
         {
-
+            Point center = new Point(((end.X + start.X)) / 2, (end.Y + start.Y) / 2);
 
             List<Point> linePoints = new List<Point>();
             linePoints.Add(new Point(start.X, start.Y));
@@ -30,7 +30,7 @@ namespace Red21_Paint.Figures
             //    //nlinePoints.Add(new Point(nlinePoints[i+1].X, nlinePoints[i+1].Y));
             //}
          
-            return new Figure (linePoints, start, end);
+            return new Figure (linePoints, start, end, center);
         }
     }
 }
