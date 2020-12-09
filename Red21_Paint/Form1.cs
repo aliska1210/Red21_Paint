@@ -7,260 +7,275 @@ using System.Windows.Forms;
 
 namespace Red21_Paint
 {
-  public partial class Form1 : Form
-  {
-    Bitmap mainBitmap;
-    Bitmap tmpBitmap;
-    Graphics graphics;
-
-    bool isMouseDown;
-    Mode mode;
-    IFigureCreator figureCreator;
-    List<Figure> figureStorage = new List<Figure>();
-    Figure editableFigure;
-    Figure tmpFigure;
-
-    Pen pen;
-    Point point;
-    Color color;
-
-    public Form1()
+    public partial class Form1 : Form
     {
-      InitializeComponent();
-    }
+        Bitmap mainBitmap;
+        Bitmap tmpBitmap;
+        Graphics graphics;
 
-    private void Form1_Load(object sender, EventArgs e)
-    {
-      mainBitmap = new Bitmap(paintSurface.MaximumSize.Width, paintSurface.MaximumSize.Height);
-      graphics = Graphics.FromImage(mainBitmap);
-      color = Color.Black;
-      pen = new Pen(color, sizePen.Value);
-    }
+        bool isMouseDown;
+        bool isColorPaket;
+        Mode mode;
+        IFigureCreator figureCreator;
+        List<Figure> figureStorage = new List<Figure>();
+        Figure editableFigure;
+        Figure tmpFigure;
 
-    private void paintSurface_MouseMove(object sender, MouseEventArgs e)
-    {
-      if (e.Button == MouseButtons.Left)
-      {
-        if (isMouseDown)
+        Pen pen;
+        Point point;
+        Color color;
+
+        public Form1()
         {
-          var penColor = mode == Mode.laser ? Color.White : color;
-          pen = new Pen(penColor, sizePen.Value)
-          {
-            EndCap = LineCap.Round,
-            StartCap = LineCap.Round
-          };
+            InitializeComponent();
+        }
 
-          if (mode == Mode.pen || mode == Mode.laser)
-          {
-            graphics.DrawLine(pen, point, e.Location);
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            mainBitmap = new Bitmap(paintSurface.MaximumSize.Width, paintSurface.MaximumSize.Height);
+            graphics = Graphics.FromImage(mainBitmap);
+            color = Color.Black;
+            pen = new Pen(color, sizePen.Value);
+        }
+
+        private void paintSurface_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (isMouseDown)
+                {
+                    var penColor = mode == Mode.laser ? Color.White : color;
+                    pen = new Pen(penColor, sizePen.Value)
+                    {
+                        EndCap = LineCap.Round,
+                        StartCap = LineCap.Round
+                    };
+
+                    if (mode == Mode.pen || mode == Mode.laser)
+                    {
+                        graphics.DrawLine(pen, point, e.Location);
+                        point = e.Location;
+                        tmpBitmap = (Bitmap)mainBitmap.Clone();
+                        paintSurface.Image = mainBitmap;
+                    }
+
+                    if (mode == Mode.figure)
+                    {
+                        tmpBitmap = new Bitmap(mainBitmap);// в tmp сохраняем mainBitmap до начала рисования новой фигуры, чтобы стирать все рисующиеся фигуры при движении (иначе будет заливка)
+                        graphics = Graphics.FromImage(tmpBitmap);// отображаем на экране то что рисуется в tmp
+                        Figure figure = figureCreator.CreateFigure(point, e.Location);
+                        figure.DrawFigure(graphics, pen);// использую свой собственный метод
+                        tmpFigure = figure;
+                        paintSurface.Image = tmpBitmap;
+                    }
+
+                    if (mode == Mode.editFigure && editableFigure != null)
+                    {
+                        tmpBitmap = new Bitmap(mainBitmap);
+                        graphics = Graphics.FromImage(tmpBitmap);
+                        Point delta = new Point(e.Location.X - point.X, e.Location.Y - point.Y);
+                        point = e.Location;
+                        editableFigure.Move(delta);
+                        tmpFigure.DrawFigure(graphics, editableFigure.Pen);
+                        paintSurface.Image = tmpBitmap;
+                        this.tmpFigure = editableFigure;
+                    }
+
+                    GC.Collect();
+                }
+            }
+        }
+
+        private void paintSurface_MouseDown(object sender, MouseEventArgs e)
+        {
+            isMouseDown = true;
             point = e.Location;
-            tmpBitmap = (Bitmap)mainBitmap.Clone();
+
+            if (mode == Mode.editFigure)
+            {
+                bool isFigureChosen = false;
+                foreach (Figure figure in figureStorage)
+                {
+                    if (IsPointMatch(point, figure.CenterPoint))
+                    {
+                        editableFigure = figure;
+                        isFigureChosen = true;
+                    }
+                }
+
+                if (isFigureChosen)
+                {
+                    figureStorage.Remove(editableFigure);
+                    DrawAll();
+                }
+            }
+        }
+
+        private void paintSurface_MouseUp(object sender, MouseEventArgs e)
+        {
+            isMouseDown = false;
+            if (mode == Mode.figure)
+            {
+                mainBitmap = tmpBitmap;
+                figureStorage.Add(tmpFigure);
+            }
+            if (mode == Mode.editFigure)
+            {
+                mainBitmap = tmpBitmap;
+                figureStorage.Add(tmpFigure);
+                editableFigure = null;
+            }
+        }
+
+        private void cyrcle_Click(object sender, EventArgs e)
+        {
+            figureCreator = new CircleCreator();
+            mode = Mode.figure;
+        }
+
+        // метод для соединения точек. Написали свой, так как стандартный не работал с List
+        private void pencil_Click(object sender, EventArgs e)
+        {
+            mode = Mode.pen;
+        }
+
+        private void triangleDraw_Click(object sender, EventArgs e)
+        {
+            figureCreator = new TriangleCreator();
+            mode = Mode.figure;
+        }
+
+        public void NumberOfCorners_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nAngle_Click(object sender, EventArgs e)
+        {
+            figureCreator = new TrueNAngleCreator();
+            mode = Mode.figure;
+        }
+        private void square_Click(object sender, EventArgs e)
+        {
+            figureCreator = new SquareCreator();
+            mode = Mode.figure;
+        }
+
+        private void rectangle_Click(object sender, EventArgs e)
+        {
+            figureCreator = new RectangleCreator();
+            mode = Mode.figure;
+        }
+        private void line_Click(object sender, EventArgs e)
+        {
+            figureCreator = new LineCreator();
+            mode = Mode.figure;
+        }
+
+        private void sasTriangle_Click(object sender, EventArgs e)
+        {
+            figureCreator = new SasTriangleCreator();
+            mode = Mode.figure;
+        }
+
+        private void laser_Click(object sender, EventArgs e)
+        {
+            mode = Mode.laser;
+        }
+
+        private void clear_Click(object sender, EventArgs e)
+        {
+            graphics.Clear(Color.White);
             paintSurface.Image = mainBitmap;
-          }
-
-          if (mode == Mode.figure)
-          {
-            tmpBitmap = new Bitmap(mainBitmap);// в tmp сохраняем mainBitmap до начала рисования новой фигуры, чтобы стирать все рисующиеся фигуры при движении (иначе будет заливка)
-            graphics = Graphics.FromImage(tmpBitmap);// отображаем на экране то что рисуется в tmp
-            Figure figure = figureCreator.CreateFigure(point, e.Location);
-            figure.DrawFigure(graphics, pen);// использую свой собственный метод
-            tmpFigure = figure;
-            paintSurface.Image = tmpBitmap;
-          }
-
-          if (mode == Mode.editFigure && editableFigure != null)
-          {
-            tmpBitmap = new Bitmap(mainBitmap);
-            graphics = Graphics.FromImage(tmpBitmap);          
-            Point delta = new Point(e.Location.X - point.X, e.Location.Y - point.Y);
-            point = e.Location;
-            editableFigure.Move(delta);
-            tmpFigure.DrawFigure(graphics, editableFigure.Pen);
-            paintSurface.Image = tmpBitmap;
-            this.tmpFigure = editableFigure;
-          }
-
-          GC.Collect();
+            figureStorage = new List<Figure>();
         }
-      }
-    }
 
-    private void paintSurface_MouseDown(object sender, MouseEventArgs e)
-    {
-      isMouseDown = true;
-      point = e.Location;
-
-      if (mode == Mode.editFigure)
-      {
-        bool isFigureChosen = false;
-        foreach (Figure figure in figureStorage)
+        private void ellipse_Click(object sender, EventArgs e)
         {
-          if (IsPointMatch(point,  figure.CenterPoint))
-          {
-            editableFigure = figure;
-            isFigureChosen = true;
-          }            
+            figureCreator = new OvalCreator();
+            mode = Mode.figure;
         }
-
-        if (isFigureChosen)
+        // выбор цвета 
+        public void buttonChooseColor_Click(object sender, EventArgs e)
         {
-          figureStorage.Remove(editableFigure);
-          DrawAll();   
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                color = colorDialog1.Color;
+            }
         }
-      }
-    }
 
-    private void paintSurface_MouseUp(object sender, MouseEventArgs e)
-    {
-      isMouseDown = false;
-      if (mode == Mode.figure)
-      {
-        mainBitmap = tmpBitmap;
-        figureStorage.Add(tmpFigure);
-      }
-      if (mode == Mode.editFigure)
-      {
-        mainBitmap = tmpBitmap;
-        figureStorage.Add(tmpFigure);
-        editableFigure = null;
-      }
-    }
-
-    private void cyrcle_Click(object sender, EventArgs e)
-    {
-      figureCreator = new CircleCreator();
-      mode = Mode.figure;
-    }
-
-    // метод для соединения точек. Написали свой, так как стандартный не работал с List
-    private void pencil_Click(object sender, EventArgs e)
-    {
-      mode = Mode.pen;
-    }
-
-    private void triangleDraw_Click(object sender, EventArgs e)
-    {
-      figureCreator = new TriangleCreator();
-      mode = Mode.figure;
-    }
-
-    public void NumberOfCorners_ValueChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    private void nAngle_Click(object sender, EventArgs e)
-    {
-      figureCreator = new TrueNAngleCreator();
-      mode = Mode.figure;
-    }
-    private void square_Click(object sender, EventArgs e)
-    {
-      figureCreator = new SquareCreator();
-      mode = Mode.figure;
-    }
-
-    private void rectangle_Click(object sender, EventArgs e)
-    {
-      figureCreator = new RectangleCreator();
-      mode = Mode.figure;
-    }
-    private void line_Click(object sender, EventArgs e)
-    {
-      figureCreator = new LineCreator();
-      mode = Mode.figure;
-    }
-
-    private void sasTriangle_Click(object sender, EventArgs e)
-    {
-      figureCreator = new SasTriangleCreator();
-      mode = Mode.figure;
-    }
-
-    private void laser_Click(object sender, EventArgs e)
-    {
-      mode = Mode.laser;
-    }
-
-    private void clear_Click(object sender, EventArgs e)
-    {
-      graphics.Clear(Color.White);
-      paintSurface.Image = mainBitmap;
-      figureStorage = new List<Figure>();
-    }
-
-    private void ellipse_Click(object sender, EventArgs e)
-    {
-      figureCreator = new OvalCreator();
-      mode = Mode.figure;
-    }
-    // выбор цвета 
-    public void buttonChooseColor_Click(object sender, EventArgs e)
-    {
-      if (colorDialog1.ShowDialog() == DialogResult.OK)
-      {
-        color = colorDialog1.Color;
-      }
-    }
-
-    private void edit_Click(object sender, EventArgs e)
-    {
-      mode = Mode.editFigure; 
-    }
-
-     //проверка попадает ли текущая точка в область центра какой либо фигуры
-    private bool IsPointMatch(Point current, Point existed)
-    {
-      return (current.X > existed.X - 15) && (current.X < existed.X + 15) 
-        && (current.Y > existed.Y - 15) && (current.Y < existed.Y + 15);
-    }
-    //public bool IsYou(Figure points)
-    //{
-    //  Point p1 = Points[3];
-    //  Point p2;
-    //  foreach (Figure figure in points)
-    //  {
-    //    p2 = p;
-    //    if (Math.Abs((point.X - p1.X) * (p2.Y - p1.Y) - (point.Y - p1.Y) * (p2.X - p1.X))
-    //        <= Math.Abs(10 * ((p2.Y - p1.Y) + (p2.X - p1.X))))
-    //    {
-    //      return true;
-    //    }
-    //    p1 = p2;
-    //  }
-    //  return false;
-    //}
-
-    private void paintSurface_MouseHover(object sender, EventArgs e)
-    {
-      if (mode == Mode.editFigure)
-      {
-        foreach (var figure in figureStorage)
+        private void edit_Click(object sender, EventArgs e)
         {
-          graphics.FillRectangle(new SolidBrush(Color.Red), figure.CenterPoint.X, figure.CenterPoint.Y, 5, 5);
+            mode = Mode.editFigure;
+            if (mode == Mode.editFigure)
+            {
+                foreach (var figure in figureStorage)
+                {
+                    graphics.FillRectangle(new SolidBrush(Color.Red), figure.CenterPoint.X, figure.CenterPoint.Y, 5, 5);
+                }
+                paintSurface.Image = mainBitmap;
+            }
+
         }
-        paintSurface.Image = mainBitmap;
-      }
-    }
 
-    private void paintSurface_MouseLeave(object sender, EventArgs e)
-    {
-      if(mode == Mode.editFigure)
-      {
-        DrawAll();
-        paintSurface.Image = mainBitmap;
-      }
-     
-    }
-    private void DrawAll()
-    {
-      graphics.Clear(Color.White);
-      foreach (Figure figure in figureStorage)
-      {
-        figure.DrawFigure(graphics, figure.Pen);
-      }
-    }
-  }
-  }
+        //проверка попадает ли текущая точка в область центра какой либо фигуры
+        private bool IsPointMatch(Point current, Point existed)
+        {
+            return (current.X > existed.X - 15) && (current.X < existed.X + 15)
+              && (current.Y > existed.Y - 15) && (current.Y < existed.Y + 15);
+        }
+        //public bool IsYou(Figure points)
+        //{
+        //  Point p1 = Points[3];
+        //  Point p2;
+        //  foreach (Figure figure in points)
+        //  {
+        //    p2 = p;
+        //    if (Math.Abs((point.X - p1.X) * (p2.Y - p1.Y) - (point.Y - p1.Y) * (p2.X - p1.X))
+        //        <= Math.Abs(10 * ((p2.Y - p1.Y) + (p2.X - p1.X))))
+        //    {
+        //      return true;
+        //    }
+        //    p1 = p2;
+        //  }
+        //  return false;
+        //}
 
-    
+        private void paintSurface_MouseHover(object sender, EventArgs e)
+        {
+            /*      if (mode == Mode.editFigure)
+                  {
+                    foreach (var figure in figureStorage)
+                    {
+                      graphics.FillRectangle(new SolidBrush(Color.Red), figure.CenterPoint.X, figure.CenterPoint.Y, 5, 5);
+                    }
+                    paintSurface.Image = mainBitmap;
+                  }*/
+        }
+
+        private void paintSurface_MouseLeave(object sender, EventArgs e)
+        {
+            if (mode == Mode.editFigure)
+            {
+                DrawAll();
+                paintSurface.Image = mainBitmap;
+            }
+
+        }
+        private void DrawAll()
+        {
+            graphics.Clear(Color.White);
+            foreach (Figure figure in figureStorage)
+            {
+                figure.DrawFigure(graphics, figure.Pen);
+            }
+        }
+
+        private void ColorPaker_CheckedChanged(object sender, EventArgs e)
+        {
+            mode = Mode.colorPaker;
+        }
+    }
+}
+
+
