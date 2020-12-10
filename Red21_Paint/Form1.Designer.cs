@@ -48,10 +48,18 @@ namespace Red21_Paint
             this.button25 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.layerPaintSurface = new System.Windows.Forms.PictureBox();
+            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
+            this.colorDialog2 = new System.Windows.Forms.ColorDialog();
+            this.background_color = new System.Windows.Forms.Button();
+            this.Layer = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.paintSurface)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sizePen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumberOfCorners)).BeginInit();
             this.panel1.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layerPaintSurface)).BeginInit();
             this.SuspendLayout();
             // 
             // paintSurface
@@ -312,7 +320,7 @@ namespace Red21_Paint
             // sizePen
             // 
             this.sizePen.LargeChange = 2;
-            this.sizePen.Location = new System.Drawing.Point(240, 12);
+            this.sizePen.Location = new System.Drawing.Point(298, 16);
             this.sizePen.Margin = new System.Windows.Forms.Padding(2);
             this.sizePen.Maximum = 30;
             this.sizePen.Minimum = 1;
@@ -418,7 +426,55 @@ namespace Red21_Paint
             this.checkBox1.TabIndex = 18;
             this.checkBox1.Text = "ColorPacked";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.ColorPaker_CheckedChanged);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.Azure;
+            this.flowLayoutPanel1.Controls.Add(this.layerPaintSurface);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 420);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(78, 141);
+            this.flowLayoutPanel1.TabIndex = 19;
+            // 
+            // layerPaintSurface
+            // 
+            this.layerPaintSurface.Location = new System.Drawing.Point(3, 3);
+            this.layerPaintSurface.Name = "layerPaintSurface";
+            this.layerPaintSurface.Size = new System.Drawing.Size(72, 41);
+            this.layerPaintSurface.TabIndex = 0;
+            this.layerPaintSurface.TabStop = false;
+            // 
+            // vScrollBar1
+            // 
+            this.vScrollBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.vScrollBar1.Location = new System.Drawing.Point(994, 61);
+            this.vScrollBar1.Name = "vScrollBar1";
+            this.vScrollBar1.Size = new System.Drawing.Size(15, 489);
+            this.vScrollBar1.TabIndex = 20;
+            // 
+            // background_color
+            // 
+            this.background_color.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("background_color.BackgroundImage")));
+            this.background_color.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.background_color.FlatAppearance.BorderSize = 0;
+            this.background_color.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.background_color.Location = new System.Drawing.Point(237, 3);
+            this.background_color.Name = "background_color";
+            this.background_color.Size = new System.Drawing.Size(56, 56);
+            this.background_color.TabIndex = 21;
+            this.background_color.UseVisualStyleBackColor = true;
+            this.background_color.Click += new System.EventHandler(this.background_color_Click);
+            // 
+            // Layer
+            // 
+            this.Layer.AutoSize = true;
+            this.Layer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Layer.Location = new System.Drawing.Point(18, 399);
+            this.Layer.Name = "Layer";
+            this.Layer.Size = new System.Drawing.Size(49, 18);
+            this.Layer.TabIndex = 22;
+            this.Layer.Text = "Layer";
             // 
             // Form1
             // 
@@ -427,6 +483,10 @@ namespace Red21_Paint
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.SlateGray;
             this.ClientSize = new System.Drawing.Size(1008, 557);
+            this.Controls.Add(this.Layer);
+            this.Controls.Add(this.background_color);
+            this.Controls.Add(this.vScrollBar1);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button25);
@@ -450,6 +510,8 @@ namespace Red21_Paint
             ((System.ComponentModel.ISupportInitialize)(this.sizePen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumberOfCorners)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.layerPaintSurface)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -478,6 +540,13 @@ namespace Red21_Paint
     private System.Windows.Forms.Button button25;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.VScrollBar vScrollBar1;
+        private System.Windows.Forms.Button backgroundColor;
+        private System.Windows.Forms.ColorDialog colorDialog2;
+        private System.Windows.Forms.Button background_color;
+        private System.Windows.Forms.PictureBox layerPaintSurface;
+        private System.Windows.Forms.Label Layer;
     }
 }
 

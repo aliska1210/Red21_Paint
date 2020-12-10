@@ -44,7 +44,7 @@ namespace Red21_Paint
             {
                 if (isMouseDown)
                 {
-                    var penColor = mode == Mode.laser ? Color.White : color;
+                    var penColor = mode == Mode.laser ? paintSurface.BackColor : color;
                     pen = new Pen(penColor, sizePen.Value)
                     {
                         EndCap = LineCap.Round,
@@ -53,32 +53,17 @@ namespace Red21_Paint
 
                     if (mode == Mode.pen || mode == Mode.laser)
                     {
-                        graphics.DrawLine(pen, point, e.Location);
-                        point = e.Location;
-                        tmpBitmap = (Bitmap)mainBitmap.Clone();
-                        paintSurface.Image = mainBitmap;
+                        PenOrEraserDrawingModePaint(e.Location);
                     }
 
                     if (mode == Mode.figure)
                     {
-                        tmpBitmap = new Bitmap(mainBitmap);// в tmp сохраняем mainBitmap до начала рисования новой фигуры, чтобы стирать все рисующиеся фигуры при движении (иначе будет заливка)
-                        graphics = Graphics.FromImage(tmpBitmap);// отображаем на экране то что рисуется в tmp
-                        Figure figure = figureCreator.CreateFigure(point, e.Location);
-                        figure.DrawFigure(graphics, pen);// использую свой собственный метод
-                        tmpFigure = figure;
-                        paintSurface.Image = tmpBitmap;
+                        FigureDrawingModeFigure(e.Location);
                     }
 
                     if (mode == Mode.editFigure && editableFigure != null)
                     {
-                        tmpBitmap = new Bitmap(mainBitmap);
-                        graphics = Graphics.FromImage(tmpBitmap);
-                        Point delta = new Point(e.Location.X - point.X, e.Location.Y - point.Y);
-                        point = e.Location;
-                        editableFigure.Move(delta);
-                        tmpFigure.DrawFigure(graphics, editableFigure.Pen);
-                        paintSurface.Image = tmpBitmap;
-                        this.tmpFigure = editableFigure;
+                        EnditFigureModeEditFigure(e.Location);
                     }
 
                     GC.Collect();
@@ -185,8 +170,9 @@ namespace Red21_Paint
 
         private void clear_Click(object sender, EventArgs e)
         {
-            graphics.Clear(Color.White);
+            graphics.Clear(paintSurface.BackColor);
             paintSurface.Image = mainBitmap;
+            layerPaintSurface.Image = paintSurface.Image;
             figureStorage = new List<Figure>();
         }
 
@@ -214,6 +200,7 @@ namespace Red21_Paint
                     graphics.FillRectangle(new SolidBrush(Color.Red), figure.CenterPoint.X, figure.CenterPoint.Y, 5, 5);
                 }
                 paintSurface.Image = mainBitmap;
+                layerPaintSurface.Image = paintSurface.Image;
             }
 
         }
@@ -259,22 +246,60 @@ namespace Red21_Paint
             {
                 DrawAll();
                 paintSurface.Image = mainBitmap;
+                layerPaintSurface.Image = paintSurface.Image;
             }
 
         }
         private void DrawAll()
         {
-            graphics.Clear(Color.White);
+            graphics.Clear(paintSurface.BackColor);
             foreach (Figure figure in figureStorage)
             {
                 figure.DrawFigure(graphics, figure.Pen);
             }
         }
 
-        private void ColorPaker_CheckedChanged(object sender, EventArgs e)
+        private void PenOrEraserDrawingModePaint(Point eLocation)
         {
-            mode = Mode.colorPaker;
+            graphics.DrawLine(pen, point, eLocation);
+            point = eLocation;
+            tmpBitmap = (Bitmap)mainBitmap.Clone();
+            paintSurface.Image = mainBitmap;
+            layerPaintSurface.Image = paintSurface.Image;
         }
+
+        private void FigureDrawingModeFigure(Point eLocation)
+        {
+            tmpBitmap = new Bitmap(mainBitmap);
+            graphics = Graphics.FromImage(tmpBitmap);
+            Figure figure = figureCreator.CreateFigure(point, eLocation);
+            figure.DrawFigure(graphics, pen);
+            tmpFigure = figure;
+            paintSurface.Image = tmpBitmap;
+            layerPaintSurface.Image = paintSurface.Image;
+        }
+
+        private void EnditFigureModeEditFigure(Point eLocation)
+        {
+            tmpBitmap = new Bitmap(mainBitmap);
+            graphics = Graphics.FromImage(tmpBitmap);
+            Point delta = new Point(eLocation.X - point.X, eLocation.Y - point.Y);
+            point = eLocation;
+            editableFigure.Move(delta);
+            tmpFigure.DrawFigure(graphics, editableFigure.Pen);
+            paintSurface.Image = tmpBitmap;
+            layerPaintSurface.Image = paintSurface.Image;
+            this.tmpFigure = editableFigure;
+        }
+
+        private void background_color_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                paintSurface.BackColor = colorDialog1.Color;
+            }
+        }
+
     }
 }
 
