@@ -14,7 +14,6 @@ namespace Red21_Paint
         Graphics graphics;
 
         bool isMouseDown;
-        bool isColorPaket;
         Mode mode;
         IFigureCreator figureCreator;
         List<Figure> figureStorage = new List<Figure>();
@@ -25,10 +24,10 @@ namespace Red21_Paint
         Point point;
         Color color;
 
-    public Form1()
-    {
-      InitializeComponent();
-    }
+        public  Form1()
+        {
+            InitializeComponent();
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -38,18 +37,19 @@ namespace Red21_Paint
             pen = new Pen(color, sizePen.Value);
         }
 
-    private void paintSurface_MouseMove(object sender, MouseEventArgs e)
-    {
-      if (e.Button == MouseButtons.Left)
-      {
-        if (isMouseDown)
+
+        private void paintSurface_MouseMove(object sender, MouseEventArgs e)
         {
-          var penColor = mode == Mode.laser ? Color.White : color;
-          pen = new Pen(penColor, sizePen.Value)
-          {
-            EndCap = LineCap.Round,
-            StartCap = LineCap.Round
-          };
+            if (e.Button == MouseButtons.Left)
+            {
+                if (isMouseDown)
+                {
+                    var penColor = mode == Mode.laser ? paintSurface.BackColor : color;
+                    pen = new Pen(penColor, sizePen.Value)
+                    {
+                        EndCap = LineCap.Round,
+                        StartCap = LineCap.Round
+                    };
 
                     if (mode == Mode.pen || mode == Mode.laser)
                     {
@@ -240,17 +240,14 @@ namespace Red21_Paint
                   }*/
         }
 
-    private void paintSurface_MouseLeave(object sender, EventArgs e)
-    {
-      if (mode == Mode.editFigure) DrawAll();
-        private void NumberOfCorners_ValueChanged_1(object sender, EventArgs e)
+        private void paintSurface_MouseLeave(object sender, EventArgs e)
         {
-            if(figureCreator is TrueNAngleCreator figure)
+            if (mode == Mode.editFigure)
             {
-                figure.Number = (int)NumberOfCorners.Value;
+                DrawAll();
+                paintSurface.Image = mainBitmap;
+                layerPaintSurface.Image = paintSurface.Image;
             }
-        }
-    }
 
         }
         private void DrawAll()
@@ -305,5 +302,7 @@ namespace Red21_Paint
 
     }
 }
+
+
 
 
