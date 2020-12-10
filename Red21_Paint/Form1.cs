@@ -125,6 +125,7 @@ namespace Red21_Paint
         mainBitmap = tmpBitmap;
         figureStorage.Add(editableFigure);
         editableFigure = null;
+        DrawMarkers();
       }
     }
 
@@ -208,6 +209,7 @@ namespace Red21_Paint
     private void edit_Click(object sender, EventArgs e)
     {
       mode = Mode.editFigure;
+      DrawMarkers();
     }
 
     //проверка попадает ли текущая точка в область центра какой либо фигуры
@@ -248,14 +250,7 @@ namespace Red21_Paint
     //
     private void paintSurface_MouseHover(object sender, EventArgs e)
     {
-      if (mode == Mode.editFigure)
-      {
-        foreach (var figure in figureStorage)
-        {
-          graphics.FillRectangle(new SolidBrush(Color.Red), figure.CenterPoint.X, figure.CenterPoint.Y, 5, 5);
-        }
-        paintSurface.Image = mainBitmap;
-      }
+      if (mode == Mode.editFigure) DrawMarkers();
     }
 
     private void paintSurface_MouseLeave(object sender, EventArgs e)
@@ -272,10 +267,19 @@ namespace Red21_Paint
       {
         if (figure != null) figure.DrawFigure(graphics, figure.Pen, figure.IsFilled);
       }
+      paintSurface.Image = mainBitmap;
     }
     private void isFilledCheckBox_CheckedChanged(object sender, EventArgs e)
     {
       isFilled = checkBox1.Checked == true;
+    }
+    private void DrawMarkers()
+    {
+      foreach (var figure in figureStorage)
+      {
+        graphics.FillRectangle(new SolidBrush(Color.Red), figure.CenterPoint.X, figure.CenterPoint.Y, 5, 5);
+      }
+      paintSurface.Image = mainBitmap;
     }
   }
 }
