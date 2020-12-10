@@ -37,6 +37,7 @@ namespace Red21_Paint
       graphics = Graphics.FromImage(mainBitmap);
       color = Color.Black;
       pen = new Pen(color, sizePen.Value);
+      mode = Mode.pen;
     }
 
     private void paintSurface_MouseMove(object sender, MouseEventArgs e)
@@ -111,9 +112,7 @@ namespace Red21_Paint
       isMouseDown = false;
       if (mode == Mode.pen)
       {
-        var penAsFigure = new Figure(points, point, point, point);
-        penAsFigure.Pen = pen;
-        figureStorage.Add(penAsFigure);
+        SavePenAsFigure();
       }
       if (mode == Mode.figure)
       {
@@ -135,7 +134,6 @@ namespace Red21_Paint
       mode = Mode.figure;
     }
 
-    // метод для соединения точек. Написали свой, так как стандартный не работал с List
     private void pencil_Click(object sender, EventArgs e)
     {
       mode = Mode.pen;
@@ -212,25 +210,11 @@ namespace Red21_Paint
       DrawMarkers();
     }
 
-    //проверка попадает ли текущая точка в область центра какой либо фигуры
-    private bool isFigureCatchedByCenterPoint()
+    private void isFilledCheckBox_CheckedChanged(object sender, EventArgs e)
     {
-      var isFigureChosen = false;
-      foreach (Figure figure in figureStorage)
-      {
-        if (IsPointMatch(point, figure.CenterPoint))
-        {
-          editableFigure = figure;
-          isFigureChosen = true;
-        }
-      }
-      return isFigureChosen;
+      isFilled = checkBox1.Checked == true;
     }
-    private bool IsPointMatch(Point current, Point existed)
-    {
-      return (current.X > existed.X - 15) && (current.X < existed.X + 15)
-        && (current.Y > existed.Y - 15) && (current.Y < existed.Y + 15);
-    }
+
     //public bool IsYou(Point point)
     //{
     //  Point p1 =  [3];
@@ -255,7 +239,7 @@ namespace Red21_Paint
 
     private void paintSurface_MouseLeave(object sender, EventArgs e)
     {
-      if (mode == Mode.editFigure) DrawAll();
+      if (mode == Mode.editFigure) DeleteMarkers();
     }
 
     private void DrawAll()
@@ -269,9 +253,25 @@ namespace Red21_Paint
       }
       paintSurface.Image = mainBitmap;
     }
-    private void isFilledCheckBox_CheckedChanged(object sender, EventArgs e)
+
+    //проверка попадает ли текущая точка в область центра какой либо фигуры
+    private bool isFigureCatchedByCenterPoint()
     {
-      isFilled = checkBox1.Checked == true;
+      var isFigureChosen = false;
+      foreach (Figure figure in figureStorage)
+      {
+        if (IsPointMatch(point, figure.CenterPoint))
+        {
+          editableFigure = figure;
+          isFigureChosen = true;
+        }
+      }
+      return isFigureChosen;
+    }
+    private bool IsPointMatch(Point current, Point existed)
+    {
+      return (current.X > existed.X - 15) && (current.X < existed.X + 15)
+        && (current.Y > existed.Y - 15) && (current.Y < existed.Y + 15);
     }
     private void DrawMarkers()
     {
@@ -280,6 +280,18 @@ namespace Red21_Paint
         graphics.FillRectangle(new SolidBrush(Color.Red), figure.CenterPoint.X, figure.CenterPoint.Y, 5, 5);
       }
       paintSurface.Image = mainBitmap;
+    }
+
+    private void DeleteMarkers()
+    {
+      DrawAll();
+    }
+
+    private void SavePenAsFigure()
+    {
+      var penAsFigure = new Figure(points, point, point, point);
+      penAsFigure.Pen = pen;
+      figureStorage.Add(penAsFigure);
     }
   }
 }
