@@ -21,17 +21,31 @@ namespace Red21_Paint.Figures
     public Point StartPoint { get; set; }
     public Point EndPoint { get; set; }
     public Pen Pen { get; set; }
-    
-    public void DrawFigure(Graphics graphics, Pen pen)
+    public bool IsFilled { get; set; }
+
+    public void DrawFigure(Graphics graphics, Pen pen, bool isFilled)
     {
       Pen = pen;
+      IsFilled = isFilled;
       if (Points.Count < 2) return;
-      for (int i = 0; i < Points.Count - 1; i++)
+      if (!IsFilled)
       {
-        graphics.DrawLine(pen, Points[i], Points[i + 1]);
+        for (int i = 0; i < Points.Count - 1; i++)
+        {
+          graphics.DrawLine(pen, Points[i], Points[i + 1]);
+        }
+        graphics.DrawLine(pen, Points[0], Points[Points.Count - 1]);
       }
-      graphics.DrawLine(pen, Points[0], Points[Points.Count - 1]);
+      else
+      {
+        SolidBrush Mybrush = new SolidBrush(pen.Color);
+        for (int i = 0; i < Points.Count - 1; i++)
+        {
+          graphics.FillPolygon(Mybrush, Points.ToArray());
+        }
+      }
     }
+
     public void Move(Point delta)
     {
       for (int i = 0; i < this.Points.Count; i++)

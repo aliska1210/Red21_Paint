@@ -18,11 +18,13 @@ namespace Red21_Paint
     IFigureCreator figureCreator;
     List<Figure> figureStorage = new List<Figure>();
     Figure editableFigure;
-    Figure tmpFigure;
+    Figure figure;
 
     Pen pen;
     Point point;
+    List<Point> points = new List<Point>();
     Color color;
+    bool isFilled;
 
     public Form1()
     {
@@ -52,6 +54,7 @@ namespace Red21_Paint
 
           if (mode == Mode.pen || mode == Mode.laser)
           {
+            points.Add(point);
             graphics.DrawLine(pen, point, e.Location);
             point = e.Location;
             tmpBitmap = (Bitmap)mainBitmap.Clone();
@@ -62,22 +65,20 @@ namespace Red21_Paint
           {
             tmpBitmap = new Bitmap(mainBitmap);// в tmp сохраняем mainBitmap до начала рисования новой фигуры, чтобы стирать все рисующиеся фигуры при движении (иначе будет заливка)
             graphics = Graphics.FromImage(tmpBitmap);// отображаем на экране то что рисуется в tmp
-            Figure figure = figureCreator.CreateFigure(point, e.Location);
-            figure.DrawFigure(graphics, pen);// использую свой собственный метод
-            tmpFigure = figure;
+            figure = figureCreator.CreateFigure(point, e.Location);
+            figure.DrawFigure(graphics, pen, isFilled);// использую свой собственный метод
             paintSurface.Image = tmpBitmap;
           }
 
           if (mode == Mode.editFigure && editableFigure != null)
           {
             tmpBitmap = new Bitmap(mainBitmap);
-            graphics = Graphics.FromImage(tmpBitmap);          
+            graphics = Graphics.FromImage(tmpBitmap);
             Point delta = new Point(e.Location.X - point.X, e.Location.Y - point.Y);
             point = e.Location;
             editableFigure.Move(delta);
-            tmpFigure.DrawFigure(graphics, editableFigure.Pen);
+            editableFigure.DrawFigure(graphics, editableFigure.Pen, editableFigure.IsFilled);
             paintSurface.Image = tmpBitmap;
-            this.tmpFigure = editableFigure;
           }
 
           GC.Collect();
@@ -90,22 +91,17 @@ namespace Red21_Paint
       isMouseDown = true;
       point = e.Location;
 
+      if (mode == Mode.pen)
+      {
+        points = new List<Point>();
+      }
+
       if (mode == Mode.editFigure)
       {
-        bool isFigureChosen = false;
-        foreach (Figure figure in figureStorage)
-        {
-          if (IsPointMatch(point,  figure.CenterPoint))
-          {
-            editableFigure = figure;
-            isFigureChosen = true;
-          }            
-        }
-
-        if (isFigureChosen)
+        if (isFigureCatchedByCenterPoint())
         {
           figureStorage.Remove(editableFigure);
-          DrawAll();   
+          DrawAll();
         }
       }
     }
@@ -113,15 +109,21 @@ namespace Red21_Paint
     private void paintSurface_MouseUp(object sender, MouseEventArgs e)
     {
       isMouseDown = false;
+      if (mode == Mode.pen)
+      {
+        var penAsFigure = new Figure(points, point, point, point);
+        penAsFigure.Pen = pen;
+        figureStorage.Add(penAsFigure);
+      }
       if (mode == Mode.figure)
       {
         mainBitmap = tmpBitmap;
-        figureStorage.Add(tmpFigure);
+        figureStorage.Add(figure);
       }
       if (mode == Mode.editFigure)
       {
         mainBitmap = tmpBitmap;
-        figureStorage.Add(tmpFigure);
+        figureStorage.Add(editableFigure);
         editableFigure = null;
       }
     }
@@ -205,18 +207,31 @@ namespace Red21_Paint
 
     private void edit_Click(object sender, EventArgs e)
     {
-      mode = Mode.editFigure; 
+      mode = Mode.editFigure;
     }
 
-     //проверка попадает ли текущая точка в область центра какой либо фигуры
+    //проверка попадает ли текущая точка в область центра какой либо фигуры
+    private bool isFigureCatchedByCenterPoint()
+    {
+      var isFigureChosen = false;
+      foreach (Figure figure in figureStorage)
+      {
+        if (IsPointMatch(point, figure.CenterPoint))
+        {
+          editableFigure = figure;
+          isFigureChosen = true;
+        }
+      }
+      return isFigureChosen;
+    }
     private bool IsPointMatch(Point current, Point existed)
     {
-      return (current.X > existed.X - 15) && (current.X < existed.X + 15) 
+      return (current.X > existed.X - 15) && (current.X < existed.X + 15)
         && (current.Y > existed.Y - 15) && (current.Y < existed.Y + 15);
     }
-    //public bool IsYou(Figure points)
+    //public bool IsYou(Point point)
     //{
-    //  Point p1 = Points[3];
+    //  Point p1 =  [3];
     //  Point p2;
     //  foreach (Figure figure in points)
     //  {
@@ -230,7 +245,7 @@ namespace Red21_Paint
     //  }
     //  return false;
     //}
-
+    //
     private void paintSurface_MouseHover(object sender, EventArgs e)
     {
       if (mode == Mode.editFigure)
@@ -245,22 +260,24 @@ namespace Red21_Paint
 
     private void paintSurface_MouseLeave(object sender, EventArgs e)
     {
-      if(mode == Mode.editFigure)
-      {
-        DrawAll();
-        paintSurface.Image = mainBitmap;
-      }
-     
+      if (mode == Mode.editFigure) DrawAll();
     }
+
     private void DrawAll()
     {
       graphics.Clear(Color.White);
+      if (figureStorage == null) return;
+
       foreach (Figure figure in figureStorage)
       {
-        figure.DrawFigure(graphics, figure.Pen);
+        if (figure != null) figure.DrawFigure(graphics, figure.Pen, figure.IsFilled);
       }
     }
+    private void isFilledCheckBox_CheckedChanged(object sender, EventArgs e)
+    {
+      isFilled = checkBox1.Checked == true;
+    }
   }
-  }
+}
 
-    
+

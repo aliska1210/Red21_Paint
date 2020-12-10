@@ -70,6 +70,7 @@ namespace Red21_Paint
       this.buttonChooseColor = new System.Windows.Forms.Button();
       this.colorDialog1 = new System.Windows.Forms.ColorDialog();
       this.button25 = new System.Windows.Forms.Button();
+      this.checkBox1 = new System.Windows.Forms.CheckBox();
       ((System.ComponentModel.ISupportInitialize)(this.paintSurface)).BeginInit();
       this.ColorBox.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.sizePen)).BeginInit();
@@ -641,6 +642,17 @@ namespace Red21_Paint
       this.button25.UseVisualStyleBackColor = true;
       this.button25.Click += new System.EventHandler(this.edit_Click);
       // 
+      // checkBox1
+      // 
+      this.checkBox1.AutoSize = true;
+      this.checkBox1.Location = new System.Drawing.Point(780, 26);
+      this.checkBox1.Name = "IsFilledCheckBox";
+      this.checkBox1.Size = new System.Drawing.Size(73, 21);
+      this.checkBox1.TabIndex = 18;
+      this.checkBox1.Text = "IsFilled";
+      this.checkBox1.UseVisualStyleBackColor = true;
+      this.checkBox1.CheckedChanged += new System.EventHandler(this.isFilledCheckBox_CheckedChanged);
+      // 
       // Form1
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -648,6 +660,7 @@ namespace Red21_Paint
       this.AutoSize = true;
       this.BackColor = System.Drawing.Color.SlateGray;
       this.ClientSize = new System.Drawing.Size(899, 661);
+      this.Controls.Add(this.checkBox1);
       this.Controls.Add(this.button25);
       this.Controls.Add(this.buttonChooseColor);
       this.Controls.Add(this.line);
@@ -730,6 +743,7 @@ namespace Red21_Paint
     private System.Windows.Forms.Button buttonChooseColor;
     private System.Windows.Forms.ColorDialog colorDialog1;
     private System.Windows.Forms.Button button25;
+    private System.Windows.Forms.CheckBox checkBox1;
   }
 }
 
