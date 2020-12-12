@@ -94,6 +94,11 @@ namespace Red21_Paint
                     DrawAll();
                 }
             }
+
+            if(mode == Mode.pipette)
+            {
+                color = mainBitmap.GetPixel(e.Location.X, e.Location.Y);
+            }
         }
 
         private void paintSurface_MouseUp(object sender, MouseEventArgs e)
@@ -300,6 +305,10 @@ namespace Red21_Paint
             }
         }
 
+        private void pipette_Click(object sender, EventArgs e)
+        {
+            mode = Mode.pipette;
+        }
     }
 }
 

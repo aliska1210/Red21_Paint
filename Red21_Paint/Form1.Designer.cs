@@ -47,13 +47,14 @@ namespace Red21_Paint
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.button25 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.Layer = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.layerPaintSurface = new System.Windows.Forms.PictureBox();
             this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.background_color = new System.Windows.Forms.Button();
-            this.Layer = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pipette = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.paintSurface)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sizePen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumberOfCorners)).BeginInit();
@@ -141,6 +142,7 @@ namespace Red21_Paint
             this.square.TabIndex = 3;
             this.square.Tag = "Square";
             this.square.UseVisualStyleBackColor = false;
+            this.square.Click += new System.EventHandler(this.square_Click);
             // 
             // cyrcle
             // 
@@ -260,6 +262,7 @@ namespace Red21_Paint
             this.nAngle.TabIndex = 10;
             this.nAngle.Tag = "NAngle";
             this.nAngle.UseVisualStyleBackColor = false;
+            this.nAngle.Click += new System.EventHandler(this.nAngle_Click);
             // 
             // laser
             // 
@@ -361,6 +364,7 @@ namespace Red21_Paint
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.pipette);
             this.panel1.Controls.Add(this.Layer);
             this.panel1.Controls.Add(this.line);
             this.panel1.Controls.Add(this.laser);
@@ -378,6 +382,17 @@ namespace Red21_Paint
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(81, 288);
             this.panel1.TabIndex = 17;
+            // 
+            // Layer
+            // 
+            this.Layer.AutoSize = true;
+            this.Layer.BackColor = System.Drawing.Color.Transparent;
+            this.Layer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Layer.Location = new System.Drawing.Point(13, 266);
+            this.Layer.Name = "Layer";
+            this.Layer.Size = new System.Drawing.Size(49, 18);
+            this.Layer.TabIndex = 22;
+            this.Layer.Text = "Layer";
             // 
             // checkBox1
             // 
@@ -423,17 +438,6 @@ namespace Red21_Paint
             this.background_color.UseVisualStyleBackColor = false;
             this.background_color.Click += new System.EventHandler(this.background_color_Click);
             // 
-            // Layer
-            // 
-            this.Layer.AutoSize = true;
-            this.Layer.BackColor = System.Drawing.Color.Transparent;
-            this.Layer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Layer.Location = new System.Drawing.Point(13, 266);
-            this.Layer.Name = "Layer";
-            this.Layer.Size = new System.Drawing.Size(49, 18);
-            this.Layer.TabIndex = 22;
-            this.Layer.Text = "Layer";
-            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Control;
@@ -445,6 +449,22 @@ namespace Red21_Paint
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(378, 69);
             this.panel2.TabIndex = 22;
+            // 
+            // pipette
+            // 
+            this.pipette.BackColor = System.Drawing.SystemColors.Control;
+            this.pipette.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pipette.FlatAppearance.BorderSize = 0;
+            this.pipette.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.pipette.Location = new System.Drawing.Point(2, 196);
+            this.pipette.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pipette.Name = "pipette";
+            this.pipette.Size = new System.Drawing.Size(36, 36);
+            this.pipette.TabIndex = 23;
+            this.pipette.Tag = "pipette";
+            this.pipette.Text = "Пипетка";
+            this.pipette.UseVisualStyleBackColor = false;
+            this.pipette.Click += new System.EventHandler(this.pipette_Click);
             // 
             // Form1
             // 
@@ -517,6 +537,7 @@ namespace Red21_Paint
         private System.Windows.Forms.PictureBox layerPaintSurface;
         private System.Windows.Forms.Label Layer;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button pipette;
     }
 }
 
