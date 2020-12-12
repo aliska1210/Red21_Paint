@@ -178,7 +178,7 @@ namespace Red21_Paint
             graphics.Clear(paintSurface.BackColor);
             paintSurface.Image = mainBitmap;
             layerPaintSurface.Image = paintSurface.Image;
-            figureStorage = new List<Figure>();
+            figureStorage.Clear();
         }
 
         private void ellipse_Click(object sender, EventArgs e)
