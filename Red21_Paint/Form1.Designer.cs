@@ -415,6 +415,7 @@ namespace Red21_Paint
             // pipette
             // 
             this.pipette.BackColor = System.Drawing.SystemColors.Control;
+            this.pipette.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pipette.BackgroundImage")));
             this.pipette.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pipette.FlatAppearance.BorderSize = 0;
             this.pipette.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -424,7 +425,6 @@ namespace Red21_Paint
             this.pipette.Size = new System.Drawing.Size(36, 36);
             this.pipette.TabIndex = 23;
             this.pipette.Tag = "pipette";
-            this.pipette.Text = "Пипетка";
             this.pipette.UseVisualStyleBackColor = false;
             this.pipette.Click += new System.EventHandler(this.pipette_Click);
             // 
