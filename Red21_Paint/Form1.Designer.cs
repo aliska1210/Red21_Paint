@@ -47,6 +47,9 @@ namespace Red21_Paint
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.button25 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.deleteLayer = new System.Windows.Forms.Button();
+            this.newLayer = new System.Windows.Forms.Button();
+            this.pipette = new System.Windows.Forms.Button();
             this.Layer = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -54,7 +57,9 @@ namespace Red21_Paint
             this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.background_color = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pipette = new System.Windows.Forms.Button();
+            this.heightCanvas = new System.Windows.Forms.NumericUpDown();
+            this.widthCanvas = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.paintSurface)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sizePen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumberOfCorners)).BeginInit();
@@ -62,20 +67,19 @@ namespace Red21_Paint
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layerPaintSurface)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.heightCanvas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.widthCanvas)).BeginInit();
             this.SuspendLayout();
             // 
             // paintSurface
             // 
-            this.paintSurface.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.paintSurface.BackColor = System.Drawing.Color.White;
             this.paintSurface.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.paintSurface.Location = new System.Drawing.Point(88, 66);
             this.paintSurface.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.paintSurface.MaximumSize = new System.Drawing.Size(1820, 944);
             this.paintSurface.Name = "paintSurface";
-            this.paintSurface.Size = new System.Drawing.Size(1103, 669);
+            this.paintSurface.Size = new System.Drawing.Size(1103, 788);
             this.paintSurface.TabIndex = 0;
             this.paintSurface.TabStop = false;
             this.paintSurface.MouseDown += new System.Windows.Forms.MouseEventHandler(this.paintSurface_MouseDown);
@@ -95,6 +99,7 @@ namespace Red21_Paint
             this.save.Tag = "save";
             this.save.Text = "Save";
             this.save.UseVisualStyleBackColor = true;
+            this.save.Click += new System.EventHandler(this.save_Click);
             // 
             // pencil
             // 
@@ -364,6 +369,8 @@ namespace Red21_Paint
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.deleteLayer);
+            this.panel1.Controls.Add(this.newLayer);
             this.panel1.Controls.Add(this.pipette);
             this.panel1.Controls.Add(this.Layer);
             this.panel1.Controls.Add(this.line);
@@ -380,8 +387,45 @@ namespace Red21_Paint
             this.panel1.Controls.Add(this.rectangle);
             this.panel1.Location = new System.Drawing.Point(2, 119);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(81, 288);
+            this.panel1.Size = new System.Drawing.Size(81, 312);
             this.panel1.TabIndex = 17;
+            // 
+            // deleteLayer
+            // 
+            this.deleteLayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.deleteLayer.Location = new System.Drawing.Point(47, 283);
+            this.deleteLayer.Name = "deleteLayer";
+            this.deleteLayer.Size = new System.Drawing.Size(24, 27);
+            this.deleteLayer.TabIndex = 25;
+            this.deleteLayer.Text = "x";
+            this.deleteLayer.UseVisualStyleBackColor = true;
+            // 
+            // newLayer
+            // 
+            this.newLayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.newLayer.Location = new System.Drawing.Point(5, 283);
+            this.newLayer.Name = "newLayer";
+            this.newLayer.Size = new System.Drawing.Size(24, 27);
+            this.newLayer.TabIndex = 24;
+            this.newLayer.Text = "+";
+            this.newLayer.UseVisualStyleBackColor = true;
+            this.newLayer.Click += new System.EventHandler(this.newLayer_Click);
+            // 
+            // pipette
+            // 
+            this.pipette.BackColor = System.Drawing.SystemColors.Control;
+            this.pipette.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pipette.FlatAppearance.BorderSize = 0;
+            this.pipette.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.pipette.Location = new System.Drawing.Point(2, 196);
+            this.pipette.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pipette.Name = "pipette";
+            this.pipette.Size = new System.Drawing.Size(36, 36);
+            this.pipette.TabIndex = 23;
+            this.pipette.Tag = "pipette";
+            this.pipette.Text = "Пипетка";
+            this.pipette.UseVisualStyleBackColor = false;
+            this.pipette.Click += new System.EventHandler(this.pipette_Click);
             // 
             // Layer
             // 
@@ -411,7 +455,7 @@ namespace Red21_Paint
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.Azure;
             this.flowLayoutPanel1.Controls.Add(this.layerPaintSurface);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 413);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 437);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(78, 141);
             this.flowLayoutPanel1.TabIndex = 19;
@@ -450,21 +494,51 @@ namespace Red21_Paint
             this.panel2.Size = new System.Drawing.Size(378, 69);
             this.panel2.TabIndex = 22;
             // 
-            // pipette
+            // heightCanvas
             // 
-            this.pipette.BackColor = System.Drawing.SystemColors.Control;
-            this.pipette.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pipette.FlatAppearance.BorderSize = 0;
-            this.pipette.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.pipette.Location = new System.Drawing.Point(2, 196);
-            this.pipette.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pipette.Name = "pipette";
-            this.pipette.Size = new System.Drawing.Size(36, 36);
-            this.pipette.TabIndex = 23;
-            this.pipette.Tag = "pipette";
-            this.pipette.Text = "Пипетка";
-            this.pipette.UseVisualStyleBackColor = false;
-            this.pipette.Click += new System.EventHandler(this.pipette_Click);
+            this.heightCanvas.Location = new System.Drawing.Point(499, 25);
+            this.heightCanvas.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.heightCanvas.Name = "heightCanvas";
+            this.heightCanvas.Size = new System.Drawing.Size(73, 20);
+            this.heightCanvas.TabIndex = 25;
+            this.heightCanvas.Value = new decimal(new int[] {
+            1820,
+            0,
+            0,
+            0});
+            // 
+            // widthCanvas
+            // 
+            this.widthCanvas.Location = new System.Drawing.Point(578, 25);
+            this.widthCanvas.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.widthCanvas.Name = "widthCanvas";
+            this.widthCanvas.Size = new System.Drawing.Size(73, 20);
+            this.widthCanvas.TabIndex = 26;
+            this.widthCanvas.Value = new decimal(new int[] {
+            944,
+            0,
+            0,
+            0});
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.ForeColor = System.Drawing.SystemColors.Control;
+            this.label1.Location = new System.Drawing.Point(517, 2);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(105, 20);
+            this.label1.TabIndex = 27;
+            this.label1.Text = "Canvas size";
             // 
             // Form1
             // 
@@ -474,7 +548,10 @@ namespace Red21_Paint
             this.BackColor = System.Drawing.Color.SlateGray;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1008, 557);
+            this.ClientSize = new System.Drawing.Size(1008, 676);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.widthCanvas);
+            this.Controls.Add(this.heightCanvas);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel1);
@@ -503,7 +580,10 @@ namespace Red21_Paint
             ((System.ComponentModel.ISupportInitialize)(this.layerPaintSurface)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.heightCanvas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.widthCanvas)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -538,6 +618,11 @@ namespace Red21_Paint
         private System.Windows.Forms.Label Layer;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button pipette;
+        private System.Windows.Forms.Button deleteLayer;
+        private System.Windows.Forms.Button newLayer;
+        private System.Windows.Forms.NumericUpDown heightCanvas;
+        private System.Windows.Forms.NumericUpDown widthCanvas;
+        private System.Windows.Forms.Label label1;
     }
 }
 

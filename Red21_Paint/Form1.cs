@@ -11,6 +11,7 @@ namespace Red21_Paint
     {
         Bitmap mainBitmap;
         Bitmap tmpBitmap;
+        //Bitmap newLayer;
         Graphics graphics;
 
         bool isMouseDown;
@@ -24,14 +25,14 @@ namespace Red21_Paint
         Point point;
         Color color;
 
-        public  Form1()
+        public Form1()
         {
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            mainBitmap = new Bitmap(paintSurface.MaximumSize.Width, paintSurface.MaximumSize.Height);
+            mainBitmap = new Bitmap(paintSurface.MaximumSize.Height, paintSurface.MaximumSize.Width);
             graphics = Graphics.FromImage(mainBitmap);
             color = Color.Black;
             pen = new Pen(color, sizePen.Value);
@@ -40,34 +41,33 @@ namespace Red21_Paint
 
         private void paintSurface_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left && isMouseDown)
             {
-                if (isMouseDown)
+
+                var penColor = mode == Mode.laser ? paintSurface.BackColor : color;
+                pen = new Pen(penColor, sizePen.Value)
                 {
-                    var penColor = mode == Mode.laser ? paintSurface.BackColor : color;
-                    pen = new Pen(penColor, sizePen.Value)
-                    {
-                        EndCap = LineCap.Round,
-                        StartCap = LineCap.Round
-                    };
+                    EndCap = LineCap.Round,
+                    StartCap = LineCap.Round
+                };
 
-                    if (mode == Mode.pen || mode == Mode.laser)
-                    {
-                        PenOrEraserDrawingModePaint(e.Location);
-                    }
-
-                    if (mode == Mode.figure)
-                    {
-                        FigureDrawingModeFigure(e.Location);
-                    }
-
-                    if (mode == Mode.editFigure && editableFigure != null)
-                    {
-                        EnditFigureModeEditFigure(e.Location);
-                    }
-
-                    GC.Collect();
+                if (mode == Mode.pen || mode == Mode.laser)
+                {
+                    PenOrEraserDrawingModePaint(e.Location);
                 }
+
+                if (mode == Mode.figure)
+                {
+                    FigureDrawingModeFigure(e.Location);
+                }
+
+                if (mode == Mode.editFigure && editableFigure != null)
+                {
+                    EnditFigureModeEditFigure(e.Location);
+                }
+
+                GC.Collect();
+
             }
         }
 
@@ -95,7 +95,7 @@ namespace Red21_Paint
                 }
             }
 
-            if(mode == Mode.pipette)
+            if (mode == Mode.pipette)
             {
                 color = mainBitmap.GetPixel(e.Location.X, e.Location.Y);
             }
@@ -309,6 +309,43 @@ namespace Red21_Paint
         {
             mode = Mode.pipette;
         }
+
+        //
+        //Доделать слои
+        //
+        private void newLayer_Click(object sender, EventArgs e)
+        {
+            //newLayer = null ;
+        }
+         
+        private void save_Click(object sender, EventArgs e)
+        {
+            if (paintSurface.Image != null)
+            {
+                SaveFileDialog save = new SaveFileDialog();
+                save.Title = "Image1";
+                save.OverwritePrompt = true;
+                save.CheckPathExists = true;
+                save.Filter = " " +
+                    "Image Files(*.JPG | *.JPG | " +
+                    "Image Files(*.PNG)| *.PNG| " +
+                    "Image Files(*.SVG)| *.SVG ";
+
+                if (save.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        paintSurface.Image.Save(save.FileName);
+                    }
+                    catch 
+                    {
+                        MessageBox.Show("Невозможно созранить файл", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+
     }
 }
 
