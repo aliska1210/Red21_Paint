@@ -327,7 +327,7 @@ namespace Red21_Paint
                 save.OverwritePrompt = true;
                 save.CheckPathExists = true;
                 save.Filter = " " +
-                    "Image Files(*.JPG | *.JPG | " +
+                    "Image Files(*.JPG) | *.JPG | " +
                     "Image Files(*.PNG)| *.PNG| " +
                     "Image Files(*.SVG)| *.SVG ";
 
@@ -345,7 +345,26 @@ namespace Red21_Paint
             }
         }
 
+        private void openFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            open.Filter = "Image Files(*.JPG) | *.JPG| " +
+                          "Image Files(*.PNG) | *.PNG| " +
+                          "All files(*.*| *.*)";
 
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    paintSurface.Image = new Bitmap(open.FileName);
+                }
+                catch 
+                {
+
+                    MessageBox.Show("Файл не соответветствует формату изображения", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }
 

@@ -36,7 +36,7 @@ namespace Red21_Paint
             this.triangleDraw = new System.Windows.Forms.Button();
             this.sasTriangle = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
-            this.ImageBox = new System.Windows.Forms.Button();
+            this.openFile = new System.Windows.Forms.Button();
             this.randomNAngle = new System.Windows.Forms.Button();
             this.nAngle = new System.Windows.Forms.Button();
             this.laser = new System.Windows.Forms.Button();
@@ -75,11 +75,11 @@ namespace Red21_Paint
             // 
             this.paintSurface.BackColor = System.Drawing.Color.White;
             this.paintSurface.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.paintSurface.Location = new System.Drawing.Point(88, 66);
+            this.paintSurface.Location = new System.Drawing.Point(89, 66);
             this.paintSurface.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.paintSurface.MaximumSize = new System.Drawing.Size(1820, 944);
+            this.paintSurface.MaximumSize = new System.Drawing.Size(944, 1820);
             this.paintSurface.Name = "paintSurface";
-            this.paintSurface.Size = new System.Drawing.Size(1103, 788);
+            this.paintSurface.Size = new System.Drawing.Size(907, 599);
             this.paintSurface.TabIndex = 0;
             this.paintSurface.TabStop = false;
             this.paintSurface.MouseDown += new System.Windows.Forms.MouseEventHandler(this.paintSurface_MouseDown);
@@ -228,15 +228,16 @@ namespace Red21_Paint
             this.button33.UseVisualStyleBackColor = false;
             this.button33.Click += new System.EventHandler(this.clear_Click);
             // 
-            // ImageBox
+            // openFile
             // 
-            this.ImageBox.Location = new System.Drawing.Point(4, 1);
-            this.ImageBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ImageBox.Name = "ImageBox";
-            this.ImageBox.Size = new System.Drawing.Size(47, 23);
-            this.ImageBox.TabIndex = 9;
-            this.ImageBox.Text = "Open";
-            this.ImageBox.UseVisualStyleBackColor = true;
+            this.openFile.Location = new System.Drawing.Point(4, 1);
+            this.openFile.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.openFile.Name = "openFile";
+            this.openFile.Size = new System.Drawing.Size(47, 23);
+            this.openFile.TabIndex = 9;
+            this.openFile.Text = "Open";
+            this.openFile.UseVisualStyleBackColor = true;
+            this.openFile.Click += new System.EventHandler(this.openFile_Click);
             // 
             // randomNAngle
             // 
@@ -556,7 +557,7 @@ namespace Red21_Paint
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.buttonChooseColor);
-            this.Controls.Add(this.ImageBox);
+            this.Controls.Add(this.openFile);
             this.Controls.Add(this.paintSurface);
             this.Controls.Add(this.save);
             this.DoubleBuffered = true;
@@ -597,7 +598,7 @@ namespace Red21_Paint
         private System.Windows.Forms.Button triangleDraw;
         private System.Windows.Forms.Button sasTriangle;
         private System.Windows.Forms.Button button33;
-        private System.Windows.Forms.Button ImageBox;
+        private System.Windows.Forms.Button openFile;
         private System.Windows.Forms.Button randomNAngle;
         private System.Windows.Forms.Button nAngle;
         private System.Windows.Forms.Button laser;
