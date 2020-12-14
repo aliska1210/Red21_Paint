@@ -98,7 +98,7 @@ namespace Red21_Paint
 
       if (mode == Mode.editFigure)
       {
-        if (isFigureCatchedByCenterPoint())
+        if (isFigureCatchedByCenterPoint() || isFigureCatchedByLineFigure())
         {
           figureStorage.Remove(editableFigure);
           DrawAll();
@@ -301,7 +301,9 @@ namespace Red21_Paint
       {
         try
         {
-          paintSurface.Image = new Bitmap(open.FileName);
+          tmpBitmap = new Bitmap(open.FileName);
+          mainBitmap = tmpBitmap;
+          paintSurface.Image = mainBitmap;
         }
         catch
         {
@@ -316,7 +318,7 @@ namespace Red21_Paint
       var isFigureChosen = false;
       foreach (Figure figure in figureStorage)
       {
-        if (IsPointMatch(point, figure.CenterPoint))
+        if (figure != null && IsPointMatch(point, figure.CenterPoint))
         {
           editableFigure = figure;
           isFigureChosen = true;
@@ -333,7 +335,7 @@ namespace Red21_Paint
     {
       foreach (var figure in figureStorage)
       {
-        graphics.FillRectangle(new SolidBrush(Color.Red), figure.CenterPoint.X, figure.CenterPoint.Y, 5, 5);
+        if (figure != null) graphics.FillRectangle(new SolidBrush(Color.Red), figure.CenterPoint.X, figure.CenterPoint.Y, 5, 5);
       }
       paintSurface.Image = mainBitmap;
     }
@@ -354,8 +356,40 @@ namespace Red21_Paint
     {
       isFilled = checkBox1.Checked == true;
     }
+    private bool isFigureCatchedByLineFigure()
+    {
+      var isFigureChosen = false;
+      foreach (Figure figure in figureStorage)
+      {
+        if (figure!= null && Contain(figure.StartPoint, figure.EndPoint, point, 50))
+        {
+          editableFigure = figure;
+          isFigureChosen = true;
+        }
+      }
+      return isFigureChosen;
+    }
+    private bool Contain(Point start, Point end, Point checkPoint, double accuracy)
+    {
+      double x1 = start.X;
+      double y1 = start.Y;
+      double x2 = end.X;
+      double y2 = end.Y;
+      double x = checkPoint.X;
+      double y = checkPoint.Y;
+
+      if (CheckInside(x, x1, x2, accuracy) && CheckInside(y, y1, y2, accuracy))
+        return Math.Abs((x - x1) * (y2 - y1) - (y - y1) * (x2 - x1)) < accuracy / 2 * Math.Sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+      else return false;
+    }
+    private bool CheckInside(double x, double a, double b, double accuracy)
+    {
+      if ((x > a - accuracy && x < b + accuracy) || (x > b - accuracy && x < a + accuracy))
+        return true;
+      else return false;
+    }
   }
-} 
+}
 
 
 

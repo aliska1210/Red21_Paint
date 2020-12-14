@@ -32,7 +32,7 @@ namespace Red21_Paint.Figures
       {
         for (int i = 0; i < Points.Count - 1; i++)
         {
-          graphics.DrawLine(pen, Points[i], Points[i + 1]);
+          graphics.DrawLine(pen, Points[i], Points[i + 1]); 
         }
         graphics.DrawLine(pen, Points[0], Points[Points.Count - 1]);
       }
